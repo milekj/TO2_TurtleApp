@@ -23,3 +23,9 @@ out/
 settings.gradle
 src/main/resources/
 src/test/resources/
+
+# Ignore files connected with eclipse
+.classpath
+.project
+.settings/
+bin/
