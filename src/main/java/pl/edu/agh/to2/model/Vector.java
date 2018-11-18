@@ -30,7 +30,11 @@ public class Vector {
         angleDegrees -= 180;
     }
 
-    private Point getEndPoint() {
+    public Point getStartPoint() {
+        return start;
+    }
+
+    public Point getEndPoint() {
         if (end == null) {
             double angleRadians = toRadians(angleDegrees);
             BigDecimal deltaX = Utilities.newBigDecimal(sin(angleRadians) * length.doubleValue());

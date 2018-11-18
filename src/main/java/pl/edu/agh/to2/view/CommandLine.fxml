@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="pl.edu.agh.to2.presenter.CommandLinePresenter"
+            prefHeight="100.0" prefWidth="600.0">
+    <top>
+        <ScrollPane fx:id="scrollPane" prefHeight="80.0" prefWidth="600.0">
+                <Label fx:id="commandsHistory" />
+        </ScrollPane>
+    </top>
+    <bottom>
+        <TextField fx:id="commandInput" onAction="#onEnter" prefHeight="20.0" prefWidth="600.0" />
+    </bottom>
+</BorderPane>

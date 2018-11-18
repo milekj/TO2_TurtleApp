@@ -23,7 +23,7 @@ public class Main extends Application {
 
         try {
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(Main.class.getResource("view/View.fxml"));
+            loader.setLocation(Main.class.getResource("view/Main.fxml"));
             BorderPane rootLayout = (BorderPane) loader.load();
 
             Scene scene = new Scene(rootLayout);
