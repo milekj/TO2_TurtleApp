@@ -1,32 +1,25 @@
 package pl.edu.agh.to2.presenter;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.TextArea;
+import pl.edu.agh.to2.parser.Command;
+import pl.edu.agh.to2.parser.CommandParser;
+
+import java.util.List;
 
 public class CommandLinePresenter {
-    @FXML
-    private ScrollPane scrollPane;
 
     @FXML
-    private Label commandsHistory;
+    private TextArea commandsInput;
 
     @FXML
-    private TextField commandInput;
+    private void onReset() {
+        commandsInput.clear();
+    }
 
     @FXML
-    private void onEnter() {
-        String command = commandInput.getText();
-
-        // TODO call parser with command argument here
-
-        if (!commandsHistory.getText().equals("")) {
-            command = '\n' + command;
-        }
-
-        commandsHistory.setText(commandsHistory.getText() + command);
-        commandInput.clear();
-        scrollPane.setVvalue(1);
+    private void onSubmit() {
+        List<Command> commands = new CommandParser(commandsInput.getText()).getCommands();
+        // TODO call BoardPresenter.handleCommands somehow
     }
 }

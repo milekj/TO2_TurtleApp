@@ -9,13 +9,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
+import pl.edu.agh.to2.model.Board;
 import pl.edu.agh.to2.model.Point;
 import pl.edu.agh.to2.model.Vector;
 import pl.edu.agh.to2.model.VectorsSet;
+import pl.edu.agh.to2.parser.Command;
 import pl.edu.agh.to2.turtle.Turtle;
 
 import java.math.BigDecimal;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -23,11 +26,14 @@ public class BoardPresenter implements Initializable {
     @FXML
     private Canvas canvas;
 
+    private Board board;
+
     private GraphicsContext gc;
     private Image turtleImg;
 
     public BoardPresenter() {
         canvas = new Canvas();
+        board = new Board();
     }
 
     @Override
@@ -40,20 +46,28 @@ public class BoardPresenter implements Initializable {
 
 
         //--- Only for test purposes
-        Turtle turtle = new Turtle();
-        turtle.setAngleDegrees(0);
-
-        VectorsSet vectors = new VectorsSet();
-        vectors.add(new Vector(new Point(0, 0), 0, 50));
-        vectors.add(new Vector(new Point(0, 50), 90, 50));
-        vectors.add(new Vector(new Point(50, 50), 180, 50));
-        vectors.add(new Vector(new Point(50, 0), 270, 50));
-
-        render(turtle, vectors.getVectorsSet());
+//        Turtle turtle = new Turtle();
+//        turtle.setAngleDegrees(0);
+//
+//        VectorsSet vectors = new VectorsSet();
+//        vectors.add(new Vector(new Point(0, 0), 0, 50));
+//        vectors.add(new Vector(new Point(0, 50), 90, 50));
+//        vectors.add(new Vector(new Point(50, 50), 180, 50));
+//        vectors.add(new Vector(new Point(50, 0), 270, 50));
+//
+//        render(turtle, vectors.getVectorsSet());
         //---
     }
 
-    public void render(Turtle turtle, Set<Vector> vectors) {
+    public void handleCommands(List<Command> commands) {
+        board.update(commands);
+        render();
+    }
+
+    public void render() {
+        Turtle turtle = board.getTurtle();
+        Set<Vector> vectors = board.getVectors().getVectorsSet();
+
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
         for (Vector vector : vectors) {
