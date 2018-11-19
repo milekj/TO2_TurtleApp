@@ -1,4 +1,4 @@
-package pl.edu.agh.to2.turtle;
+package pl.edu.agh.to2.model;
 
 public enum EMarkerState {
 	UP,

@@ -1,4 +1,4 @@
-package pl.edu.agh.to2;
+package pl.edu.agh.to2.model;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,13 +11,10 @@ class PointTest {
         Point p1 = new Point(0, 0);
         Point p2 = new Point(0, 0);
         assertEquals(p1, p2);
-    }
 
-    @Test
-    void testNotEquals() {
-        Point p1 = new Point(0, 0);
-        Point p2 = new Point(1, -1);
-        assertNotEquals(p1, p2);
+        Point p3 = new Point(0, 0);
+        Point p4 = new Point(1, -1);
+        assertNotEquals(p3, p4);
     }
 
     @Test
@@ -28,14 +25,15 @@ class PointTest {
         BigDecimal actual = p1.getDistance(p2);
         assertTrue(expected.compareTo(actual) == 0);
 
-        Point p3 = new Point(4.9789, 0);
-        actual = p1.getDistance(p3);
+        Point p3 = new Point(0,0);
+        Point p4 = new Point(4.9789, 0);
+        actual = p3.getDistance(p4);
         assertTrue(expected.compareTo(actual) == 0);
 
-        Point p4 = new Point(2, 2);
-        Point p5 = new Point(6, 5);
+        Point p5 = new Point(2, 2);
+        Point p6 = new Point(6, 5);
         expected = new BigDecimal("5");
-        actual = p4.getDistance(p5);
+        actual = p5.getDistance(p6);
         assertTrue(expected.compareTo(actual) == 0);
     }
 }

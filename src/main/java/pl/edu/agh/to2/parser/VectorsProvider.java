@@ -5,8 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import pl.edu.agh.to2.model.*;
-import pl.edu.agh.to2.turtle.EMarkerState;
-import pl.edu.agh.to2.turtle.Turtle;
+import pl.edu.agh.to2.model.EMarkerState;
+import pl.edu.agh.to2.model.Turtle;
 
 public class VectorsProvider {
 	private Turtle currentPosition;

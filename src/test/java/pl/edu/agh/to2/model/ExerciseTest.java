@@ -1,4 +1,4 @@
-package pl.edu.agh.to2;
+package pl.edu.agh.to2.model;
 
 //import com.sun.deploy.config.VerboseDefaultConfig;
 import org.junit.jupiter.api.Test;
@@ -37,28 +37,29 @@ class ExerciseTest {
         assertTrue(ex.vectorsPass(vectors));
         //square
 
-        Vector e5 = new Vector(p1, 90, 10);
+        Point p6 = new Point(0, 0);
+        Vector e5 = new Vector(p6, 90, 10);
         Exercise ex2 = new Exercise(Collections.singleton(e5));
 
-        Point p6 = new Point(10, 0);
-        Point p7 = new Point(5, 0);
-        Vector v6 = new Vector(p6, 270, 5);
-        Vector v7 = new Vector(p7, 270, 5);
+        Point p7 = new Point(10, 0);
+        Point p8 = new Point(5, 0);
+        Vector v6 = new Vector(p7, 270, 5);
+        Vector v7 = new Vector(p8, 270, 5);
         VectorsSet set2 = new VectorsSet(Arrays.asList(v6, v7));
         assertTrue(ex2.vectorsPass(set2.getVectorsSet()));
         //line from two lines
 
         double _5sqrt2 = Math.sqrt(2) * 5;
-        Point p8 = new Point(5, 0);
+        Point p9 = new Point(5, 0);
         Vector e6 = new Vector(p1, 90, 5);
-        Vector e7 = new Vector(p8, 180, 5);
+        Vector e7 = new Vector(p9, 180, 5);
         Vector e8 = new Vector(p1, 135, _5sqrt2);
         Exercise ex3 = new Exercise(new HashSet<>(Arrays.asList(e6, e7, e8)));
 
-        Point p9 = new Point(5, -5);
-        Vector v8 = new Vector(p9, 315, _5sqrt2);
-        Vector v9 = new Vector(p8, 270, 5);
-        Vector v10 = new Vector(p9, 0, 5);
+        Point p10 = new Point(5, -5);
+        Vector v8 = new Vector(p10, 315, _5sqrt2);
+        Vector v9 = new Vector(p9, 270, 5);
+        Vector v10 = new Vector(p10, 0, 5);
         VectorsSet set3 = new VectorsSet(Arrays.asList(v8, v9, v10));
         assertTrue(ex3.vectorsPass(set3.getVectorsSet()));
         //triangle

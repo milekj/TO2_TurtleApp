@@ -11,4 +11,9 @@ public class Exercise {
     public boolean vectorsPass(Set<Vector> testedVectors) {
         return vectors.equals(testedVectors);
     }
+
+    @Override
+    public String toString() {
+        return "Exercise: {" + vectors + '}';
+    }
 }

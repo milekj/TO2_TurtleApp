@@ -3,6 +3,7 @@ package pl.edu.agh.to2.model;
 import java.math.BigDecimal;
 import java.util.Objects;
 import static java.lang.Math.*;
+import static pl.edu.agh.to2.model.Utilities.FULL_ANGLE_DEGREES;
 
 public class Vector {
     private Point start;
@@ -14,8 +15,8 @@ public class Vector {
         this.start = start;
         this.end = null;
         this.length = Utilities.newBigDecimal(length);
-        this.angleDegrees = angleDegrees;
-        if (angleDegrees >= 180)
+        this.angleDegrees = angleDegrees % FULL_ANGLE_DEGREES;
+        if (angleDegrees >= FULL_ANGLE_DEGREES / 2)
             normalizeAngle();
     }
 
