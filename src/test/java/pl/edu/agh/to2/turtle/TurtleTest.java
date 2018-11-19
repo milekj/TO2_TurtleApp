@@ -14,7 +14,7 @@ class TurtleTest {
 	void testInitialiseTurtle() {
 		Turtle t = new Turtle();
 		assertEquals(t.getPosition(), new Point(0, 0));
-		assertEquals(t.getAngleDegrees(), 0);
+		assertEquals(t.getAngleDegrees(), 90);
 		assertEquals(t.getMarkerState(), EMarkerState.DOWN);
 	}
 }
