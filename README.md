@@ -2,7 +2,7 @@
 Projekt realizowany w ramach ćwiczeń: Technologie Obiektowe 2
 
 ## Cel ćwiczenia
-Celem tej aplikacji jest stworzenie platformy wspomagającej naukę programowania dla dzieci w wieku szkolnym.
+Celem tej aplikacji jest stworzenie platformy wspomagającej naukę programowania dla dzieci w wieku szkolnym. <br>
 Aplikacja ta podzielona będzie na dwie części:
 1. Część przechowująca zbiory zadań
 2. Część interaktywna, w której użytkownik może pisać komendy
@@ -15,10 +15,10 @@ Aplikacja składa się z trzech obsarów:
 3. Przycisków [Clear] oraz [Run], które to albo czyszczą ekran albo przesyłają aktualną komendę, znajdującą się w polu tekstowym, do systemu
 
 ## Zasada działania programu
-Po wpisaniu polecenia i zatwierdzeniu go przyciskiem [Run], tekst znajdujący się w polu tekstowym przesyłany jest do systemu, który to parsuje go, a następnie uaktualnia pozycję żółwia oraz [listę narysowanych wektorów].
-[lista narysowanych wektorów] - jest to lista, która przechowuje wszystkie widoczne wektory narysowane przez żółwia w danej sesji
-W momencie kiedy [lista narysowanych wektorów] jest równa [liście wektorów zawatych w treści ćwiczenia] zadanie zostaje uznane za zaliczone
-Porównanie to dokonywane jest przy każdorazowej aktualizacji [listy narysowanych wektorów]
+Po wpisaniu polecenia i zatwierdzeniu go przyciskiem [Run], tekst znajdujący się w polu tekstowym przesyłany jest do systemu, który to parsuje go, a następnie uaktualnia pozycję żółwia oraz [listę narysowanych wektorów]. <br>
+[lista narysowanych wektorów] - jest to lista, która przechowuje wszystkie widoczne wektory narysowane przez żółwia w danej sesji <br>
+W momencie kiedy [lista narysowanych wektorów] jest równa [liście wektorów zawatych w treści ćwiczenia] zadanie zostaje uznane za zaliczone <br>
+Porównanie to dokonywane jest przy każdorazowej aktualizacji [listy narysowanych wektorów] <br>
 Przycisk [Clear] czyści aktualną sesję i rozpoczyna nową
 
 ## milestone1 - co już mamy?
