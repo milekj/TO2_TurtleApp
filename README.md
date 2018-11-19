@@ -5,7 +5,7 @@ Projekt realizowany w ramach ćwiczeń: Technologie Obiektowe 2
 Celem tej aplikacji jest stworzenie platformy wspomagającej naukę programowania dla dzieci w wieku szkolnym. <br>
 Aplikacja ta podzielona będzie na dwie części:
 1. Część przechowująca zbiory zadań
-2. Część interaktywna, w której użytkownik może pisać komendy
+2. Część interaktywna, w której użytkownik może pisać komendy <br>
 Zadaniem użytkownika będzie stworzenie takiego obrazka, jaki ukazany jest w treści ćwiczenia.
 
 ## Budowa UI
@@ -16,10 +16,10 @@ Aplikacja składa się z trzech obsarów:
 
 ## Zasada działania programu
 Po wpisaniu polecenia i zatwierdzeniu go przyciskiem [Run], tekst znajdujący się w polu tekstowym przesyłany jest do systemu, który to parsuje go, a następnie uaktualnia pozycję żółwia oraz [listę narysowanych wektorów]. <br>
-[lista narysowanych wektorów] - jest to lista, która przechowuje wszystkie widoczne wektory narysowane przez żółwia w danej sesji <br>
-W momencie kiedy [lista narysowanych wektorów] jest równa [liście wektorów zawatych w treści ćwiczenia] zadanie zostaje uznane za zaliczone <br>
+[lista narysowanych wektorów] - jest to lista, która przechowuje wszystkie widoczne wektory narysowane przez żółwia w danej sesji. <br>
+W momencie kiedy [lista narysowanych wektorów] jest równa [liście wektorów zawatych w treści ćwiczenia] zadanie zostaje uznane za zaliczone. <br>
 Porównanie to dokonywane jest przy każdorazowej aktualizacji [listy narysowanych wektorów] <br>
-Przycisk [Clear] czyści aktualną sesję i rozpoczyna nową
+Przycisk [Clear] czyści aktualną sesję i rozpoczyna nową.
 
 ## milestone1 - co już mamy?
 - Zrobiliśmy interaktywne GUI, będące w stanie obsługiwać podstawowe komendy { NP [liczba], LW [liczba], PW [liczba] }
