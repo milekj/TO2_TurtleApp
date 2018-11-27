@@ -2,15 +2,15 @@ package pl.edu.agh.to2.model;
 
 import java.util.*;
 
-public class VectorsSet {
+public class DisjointVectorsCollection {
     private List<Vector> vectors;
 
-    public VectorsSet(List<Vector> vectors) {
+    public DisjointVectorsCollection(List<Vector> vectors) {
         this();
         addAll(vectors);
     }
 
-    public VectorsSet() {
+    public DisjointVectorsCollection() {
         vectors = new LinkedList<>();
     }
 

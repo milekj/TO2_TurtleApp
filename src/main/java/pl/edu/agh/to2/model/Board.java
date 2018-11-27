@@ -10,14 +10,14 @@ import java.util.List;
 
 public class Board implements ObservableValue<Board>{
     private Turtle turtle;
-    private VectorsSet vectors;
+    private DisjointVectorsCollection vectors;
     private Exercise exercise;
 
     private List<ChangeListener<? super Board>> listeners;
 
     public Board(Exercise exercise) {
         turtle = new Turtle();
-        vectors = new VectorsSet();
+        vectors = new DisjointVectorsCollection();
         this.exercise = exercise;
         listeners = new LinkedList<>();
     }
@@ -26,7 +26,7 @@ public class Board implements ObservableValue<Board>{
         return turtle;
     }
 
-    public VectorsSet getVectors() {
+    public DisjointVectorsCollection getVectors() {
         return vectors;
     }
 
@@ -56,7 +56,7 @@ public class Board implements ObservableValue<Board>{
 
     public void clear() {
         turtle = new Turtle();
-        vectors = new VectorsSet();
+        vectors = new DisjointVectorsCollection();
         notifyListeners();
     }
 
