@@ -2,15 +2,13 @@ package pl.edu.agh.to2;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import pl.edu.agh.to2.model.Board;
 import pl.edu.agh.to2.model.Exercise;
-import pl.edu.agh.to2.model.Utilities;
-import pl.edu.agh.to2.presenter.BoardPresenter;
-import pl.edu.agh.to2.presenter.CommandLinePresenter;
+import pl.edu.agh.to2.model.ExericesManager;
+import pl.edu.agh.to2.model.geometry.Utilities;
 import pl.edu.agh.to2.presenter.MainPresenter;
 
 import java.io.IOException;
@@ -29,7 +27,11 @@ public class Main extends Application {
 
         Exercise squareExercise = Utilities.getExampleExercise();
 
-        Board board = new Board(squareExercise);
+        ExericesManager manager = new ExericesManager("ex");
+        manager.moveToNext();
+        manager.moveToNext();
+        manager.moveToNext();
+        Board board = new Board(manager.getCurrent());
 
         try {
             FXMLLoader loader = new FXMLLoader();

@@ -1,8 +1,9 @@
-package pl.edu.agh.to2.model;
+package pl.edu.agh.to2.model.geometry;
+
+import pl.edu.agh.to2.model.Exercise;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.HashSet;
 
 public class Utilities {
     public static int FULL_ANGLE_DEGREES = 360;
@@ -19,6 +20,6 @@ public class Utilities {
         Vector v2 = new Vector(p1, 180, 100);
         Vector v4 = new Vector(p2, 0, 100);
         Vector v5 = new Vector(p2, 270, 100);
-        return new Exercise(new HashSet<>(Arrays.asList(v1, v2, v4, v5)));
+        return new Exercise(Arrays.asList(v1, v2, v4, v5));
     }
 }

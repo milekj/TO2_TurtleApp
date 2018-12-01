@@ -1,6 +1,8 @@
 package pl.edu.agh.to2.model;
 
-import static pl.edu.agh.to2.model.Utilities.FULL_ANGLE_DEGREES;
+import pl.edu.agh.to2.model.geometry.Point;
+
+import static pl.edu.agh.to2.model.geometry.Utilities.FULL_ANGLE_DEGREES;
 
 public class Turtle {
 	private Point position;

@@ -10,16 +10,18 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import pl.edu.agh.to2.model.Board;
-import pl.edu.agh.to2.model.Point;
-import pl.edu.agh.to2.model.Vector;
+import pl.edu.agh.to2.model.geometry.Point;
+import pl.edu.agh.to2.model.geometry.Vector;
 import pl.edu.agh.to2.model.Turtle;
 
 import java.math.BigDecimal;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
-import java.util.Set;
 
 public class BoardPresenter implements Initializable {
+    public static double turtleLinesAlpha = 1.0;
+    public static double exerciseLinesAlpha = 0.25;
     @FXML
     private Canvas canvas;
 
@@ -49,15 +51,16 @@ public class BoardPresenter implements Initializable {
 
     private void render() {
         Turtle turtle = board.getTurtle();
-        Set<Vector> vectors = board.getVectors().getVectorsSet();
+        List<Vector> vectors = board.getVectors();
 
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
-        for (Vector vector : vectors) {
-            Point start = vector.getStartPoint();
-            Point end = vector.getEndPoint();
-            gc.strokeLine(translateX(start.getX()), translateY(start.getY()), translateX(end.getX()), translateY(end.getY()));
-        }
+        gc.setGlobalAlpha(exerciseLinesAlpha);
+        renderVectors(board.getExercise().getVectors());
+
+        gc.setGlobalAlpha(turtleLinesAlpha);
+        renderVectors(vectors);
+
 
         double turtleX = translateX(turtle.getPosition().getX()) - 12;
         double turtleY = translateY(turtle.getPosition().getY()) - 14;
@@ -75,6 +78,14 @@ public class BoardPresenter implements Initializable {
         Image rotatedImage = iv.snapshot(params, null);
 
         gc.drawImage(rotatedImage, turtleX, turtleY);
+    }
+
+    private void renderVectors(Iterable<Vector> vectors) {
+        for (Vector vector : vectors) {
+            Point start = vector.getStartPoint();
+            Point end = vector.getEndPoint();
+            gc.strokeLine(translateX(start.getX()), translateY(start.getY()), translateX(end.getX()), translateY(end.getY()));
+        }
     }
 
     private double translateX(BigDecimal value) {

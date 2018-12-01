@@ -2,7 +2,7 @@ package pl.edu.agh.to2.model;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-import pl.edu.agh.to2.model.Point;
+import pl.edu.agh.to2.model.geometry.Point;
 import java.math.BigDecimal;
 
 class PointTest {

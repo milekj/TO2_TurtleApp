@@ -3,6 +3,8 @@ package pl.edu.agh.to2.model;
 import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import pl.edu.agh.to2.model.geometry.Point;
+import pl.edu.agh.to2.model.geometry.Vector;
 import pl.edu.agh.to2.parser.Command;
 
 import java.util.LinkedList;
@@ -10,23 +12,29 @@ import java.util.List;
 
 public class Board implements ObservableValue<Board>{
     private Turtle turtle;
-    private DisjointVectorsCollection vectors;
+    private LinkedList<Vector> vectors;
     private Exercise exercise;
+    private int commandsNumber;
 
     private List<ChangeListener<? super Board>> listeners;
 
-    public Board(Exercise exercise) {
+    public Board() {
         turtle = new Turtle();
-        vectors = new DisjointVectorsCollection();
-        this.exercise = exercise;
+        vectors = new LinkedList<>();
         listeners = new LinkedList<>();
+        commandsNumber = 0;
+    }
+
+    public Board(Exercise exercise) {
+        this();
+        this.exercise = exercise;
     }
 
     public Turtle getTurtle() {
         return turtle;
     }
 
-    public DisjointVectorsCollection getVectors() {
+    public LinkedList<Vector> getVectors() {
         return vectors;
     }
 
@@ -42,12 +50,15 @@ public class Board implements ObservableValue<Board>{
                     else
                         newPosition = vector.getStartPoint();
                     turtle.setPosition(newPosition);
+                    commandsNumber++;
                     break;
                 case LW:
                     turtle.addToAngleDegrees(-c.getNumber());
+                    commandsNumber++;
                     break;
                 case PW:
                     turtle.addToAngleDegrees(c.getNumber());
+                    commandsNumber++;
                     break;
             }
             notifyListeners();
@@ -56,12 +67,12 @@ public class Board implements ObservableValue<Board>{
 
     public void clear() {
         turtle = new Turtle();
-        vectors = new DisjointVectorsCollection();
+        vectors = new LinkedList<>();
         notifyListeners();
     }
 
     public boolean isExercisePassed() {
-        return exercise.vectorsPass(vectors.getVectorsSet());
+        return exercise.vectorsPass(vectors);
     }
 
     public Exercise getExercise() {

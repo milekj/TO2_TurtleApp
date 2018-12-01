@@ -1,9 +1,9 @@
-package pl.edu.agh.to2.model;
+package pl.edu.agh.to2.model.geometry;
 
 import java.math.BigDecimal;
 import java.util.Objects;
 import static java.lang.Math.*;
-import static pl.edu.agh.to2.model.Utilities.FULL_ANGLE_DEGREES;
+import static pl.edu.agh.to2.model.geometry.Utilities.FULL_ANGLE_DEGREES;
 
 public class Vector {
     private Point start;

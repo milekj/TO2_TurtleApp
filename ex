@@ -1,0 +1,1 @@
+np 100 pw 90 np 100 pw 90 np 100 pw 90 np 100 pw 90/np 100 lw 120 np 100 lw 120 np 100 lw 120/np 60 lw 72 np 60 lw 72 np 60 lw 72 np 60 lw 72 np 60 lw 72

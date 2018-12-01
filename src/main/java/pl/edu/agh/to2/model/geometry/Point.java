@@ -1,4 +1,4 @@
-package pl.edu.agh.to2.model;
+package pl.edu.agh.to2.model.geometry;
 
 import java.math.BigDecimal;
 import java.util.Objects;
