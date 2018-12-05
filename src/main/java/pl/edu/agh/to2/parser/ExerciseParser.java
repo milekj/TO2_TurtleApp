@@ -37,8 +37,9 @@ public class ExerciseParser {
         try {
             CommandParser parser = new CommandParser(exerciseText);
             Board board = new Board();
-            board.update(parser.getCommands());
-            return new Exercise(board.getVectors());
+            List<Command> commands = parser.getCommands();
+            board.update(commands);
+            return new Exercise(board.getVectors(), commands.size());
         } catch (ExceptionInInitializerError e) {
             throw new IllegalArgumentException("Passed text is not a valid exercise text", e);
         }

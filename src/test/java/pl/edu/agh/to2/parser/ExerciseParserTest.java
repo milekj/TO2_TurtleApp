@@ -21,7 +21,7 @@ class ExerciseParserTest {
         Point p2 = new Point(100, -100);
         Vector v1 = new Vector(p1, 90, 100);
         Vector v2 = new Vector(p2, 0, 100);
-        Exercise expected = new Exercise(Arrays.asList(v1, v2));
+        Exercise expected = new Exercise(Arrays.asList(v1, v2), 4);
         List<Exercise> actual = pa1.getAllExercises();
         assertEquals(1, actual.size());
         assertEquals(expected, actual.get(0));
@@ -32,9 +32,9 @@ class ExerciseParserTest {
         Vector v3 = new Vector(p3, 90, 100);
         Vector v4 = new Vector(p3, 90, 50);
         Vector v5 = new Vector(p3, 90, 10);
-        List<Exercise> expectedList = Arrays.asList(new Exercise(Collections.singletonList(v3)),
-                                        new Exercise(Collections.singletonList(v4)),
-                                        new Exercise(Collections.singletonList(v5)));
+        List<Exercise> expectedList = Arrays.asList(new Exercise(Collections.singletonList(v3), 2),
+                                        new Exercise(Collections.singletonList(v4), 2),
+                                        new Exercise(Collections.singletonList(v5), 2));
         List<Exercise> actualList = pa2.getAllExercises();
         assertEquals(expectedList, actualList);
 

@@ -13,32 +13,25 @@ public class Exercise {
     private ExerciseGrade grade;
     private int commandsNumber;
 
-    public Exercise(List<Vector> vectors) {
-        this();
+    public Exercise(List<Vector> vectors, int commandsNumber) {
+        this.grade = UNSOLVED;
         DisjointVectorsCollection disjointVectors = new DisjointVectorsCollection(vectors);
         this.vectors = disjointVectors.getVectorsSet();
+        this.commandsNumber = commandsNumber;
     }
 
-    private Exercise() {
-        this.grade = UNSOLVED;
-        commandsNumber = 0;
-    }
-
-    public boolean vectorsPass(List<Vector> testedVectors) {
-        DisjointVectorsCollection disjointVectors = new DisjointVectorsCollection(testedVectors);
-        Set<Vector> testedVectorsSet = disjointVectors.getVectorsSet();
-        return vectors.equals(testedVectorsSet);
-    }
-
-    public void evaluate(List<Vector> testedVectors, int commandsNumber) {
+    public ExerciseGrade evaluate(List<Vector> testedVectors, int commandsNumber) {
         DisjointVectorsCollection disjointVectors = new DisjointVectorsCollection(testedVectors);
         Set<Vector> testedVectorsSet = disjointVectors.getVectorsSet();
         if (vectors.equals(testedVectorsSet)) {
             if(commandsNumber <= this.commandsNumber)
                 grade = IDEAL;
-            grade = SOLVED;
+            else
+                grade = SOLVED;
         }
-        grade = UNSOLVED;
+        else
+            grade = UNSOLVED;
+        return grade;
     }
 
     public Set<Vector> getVectors() {
@@ -50,7 +43,8 @@ public class Exercise {
         if (!(o instanceof Exercise)) return false;
         Exercise that = (Exercise) o;
         return this.vectors.equals(that.vectors) &&
-                this.commandsNumber == that.commandsNumber;
+                this.commandsNumber == that.commandsNumber &&
+                this.grade == that.grade;
     }
 
     @Override
@@ -60,6 +54,6 @@ public class Exercise {
 
     @Override
     public String toString() {
-        return "Exercise: {" + vectors + '}';
+        return "Exercise: {" + vectors + ", " + grade + ", " + commandsNumber + "}";
     }
 }

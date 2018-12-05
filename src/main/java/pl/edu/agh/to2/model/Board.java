@@ -68,11 +68,12 @@ public class Board implements ObservableValue<Board>{
     public void clear() {
         turtle = new Turtle();
         vectors = new LinkedList<>();
+        commandsNumber = 0;
         notifyListeners();
     }
 
-    public boolean isExercisePassed() {
-        return exercise.vectorsPass(vectors);
+    public ExerciseGrade getExerciseGrade() {
+        return exercise.evaluate(vectors, commandsNumber);
     }
 
     public Exercise getExercise() {
@@ -100,9 +101,11 @@ public class Board implements ObservableValue<Board>{
 
     @Override
     public void addListener(InvalidationListener listener) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void removeListener(InvalidationListener listener) {
+        throw new UnsupportedOperationException();
     }
 }

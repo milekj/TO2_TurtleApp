@@ -25,8 +25,6 @@ public class Main extends Application {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Turtle App");
 
-        Exercise squareExercise = Utilities.getExampleExercise();
-
         ExericesManager manager = new ExericesManager("ex");
         manager.moveToNext();
         manager.moveToNext();

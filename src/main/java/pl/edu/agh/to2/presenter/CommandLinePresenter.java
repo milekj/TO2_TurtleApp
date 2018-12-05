@@ -31,6 +31,6 @@ public class CommandLinePresenter {
 
         //only for demo, will be changed later
         System.out.println(board.getExercise());
-        System.out.println("Is exercise passed?: " + board.isExercisePassed());
+        System.out.println("Is exercise passed?: " + board.getExerciseGrade());
     }
 }

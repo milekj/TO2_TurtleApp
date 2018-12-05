@@ -43,8 +43,11 @@ public class ExericesManager {
     }
 
     public Exercise moveToPrevious() {
-        if(hasPrevious())
+        if(!hasNext())
+            iterator.previous();
+        if(hasPrevious()) {
             current = iterator.previous();
+        }
         return current;
     }
 
