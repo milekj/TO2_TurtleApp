@@ -3,9 +3,9 @@ package pl.edu.agh.to2.model;
 import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import pl.edu.agh.to2.model.commands.Command;
 import pl.edu.agh.to2.model.geometry.Point;
 import pl.edu.agh.to2.model.geometry.Vector;
-import pl.edu.agh.to2.parser.Command;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -30,41 +30,6 @@ public class Board implements ObservableValue<Board>{
         this.exercise = exercise;
     }
 
-    public Turtle getTurtle() {
-        return turtle;
-    }
-
-    public LinkedList<Vector> getVectors() {
-        return vectors;
-    }
-
-    public void update(List<Command> commands) {
-        for (Command c : commands) {
-            switch (c.getCommand()) {
-                case NP:
-                    Vector vector = new Vector(turtle.getPosition(), turtle.getAngleDegrees(), c.getNumber());
-                    vectors.add(vector);
-                    Point newPosition;
-                    if (turtle.getPosition().equals(vector.getStartPoint()))
-                        newPosition = vector.getEndPoint();
-                    else
-                        newPosition = vector.getStartPoint();
-                    turtle.setPosition(newPosition);
-                    commandsNumber++;
-                    break;
-                case LW:
-                    turtle.addToAngleDegrees(-c.getNumber());
-                    commandsNumber++;
-                    break;
-                case PW:
-                    turtle.addToAngleDegrees(c.getNumber());
-                    commandsNumber++;
-                    break;
-            }
-            notifyListeners();
-        }
-    }
-
     public void clear() {
         turtle = new Turtle();
         vectors = new LinkedList<>();
@@ -72,12 +37,38 @@ public class Board implements ObservableValue<Board>{
         notifyListeners();
     }
 
+    public void addVector(Vector vector) {
+        vectors.add(vector);
+    }
+
+    public void incrementCommandsNumber() {
+        commandsNumber++;
+    }
+
     public ExerciseGrade getExerciseGrade() {
         return exercise.evaluate(vectors, commandsNumber);
     }
 
+    public Turtle getTurtle() {
+        return turtle;
+    }
+
     public Exercise getExercise() {
         return exercise;
+    }
+
+    public LinkedList<Vector> getVectors() {
+        return vectors;
+    }
+
+    public int getCommandsNumber() {
+        return commandsNumber;
+    }
+
+    public void executeCommands(List<Command> commands) {
+        for (Command c : commands)
+            c.execute(this);
+        notifyListeners();
     }
 
     private void notifyListeners() {

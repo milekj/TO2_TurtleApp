@@ -6,9 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import pl.edu.agh.to2.model.Board;
-import pl.edu.agh.to2.model.Exercise;
 import pl.edu.agh.to2.model.ExericesManager;
-import pl.edu.agh.to2.model.geometry.Utilities;
 import pl.edu.agh.to2.presenter.MainPresenter;
 
 import java.io.IOException;

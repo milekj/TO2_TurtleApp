@@ -10,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import pl.edu.agh.to2.model.Board;
+import pl.edu.agh.to2.model.EMarkerState;
 import pl.edu.agh.to2.model.geometry.Point;
 import pl.edu.agh.to2.model.geometry.Vector;
 import pl.edu.agh.to2.model.Turtle;
@@ -20,8 +21,10 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class BoardPresenter implements Initializable {
-    public static double turtleLinesAlpha = 1.0;
-    public static double exerciseLinesAlpha = 0.25;
+    private static double turtleLinesAlpha = 1.0;
+    private static double exerciseLinesAlpha = 0.25;
+    private static double turtleUpAlpha = 0.5;
+
     @FXML
     private Canvas canvas;
 
@@ -77,6 +80,10 @@ public class BoardPresenter implements Initializable {
         params.setFill(Color.TRANSPARENT);
         Image rotatedImage = iv.snapshot(params, null);
 
+        if(turtle.getMarkerState() == EMarkerState.UP)
+            gc.setGlobalAlpha(turtleUpAlpha);
+        else
+            gc.setGlobalAlpha(turtleLinesAlpha);
         gc.drawImage(rotatedImage, turtleX, turtleY);
     }
 

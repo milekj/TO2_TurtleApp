@@ -1,47 +1,64 @@
 package pl.edu.agh.to2.parser;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
+import pl.edu.agh.to2.model.EMarkerState;
+import pl.edu.agh.to2.model.commands.*;
+import pl.edu.agh.to2.model.commands.Command;
 
-/**
- * Created by michal on 16.11.18.
- */
+import java.util.*;
+
 public class CommandParser {
-    private List<Command> commands;
+    private Scanner scanner;
+    private String token;
 
-    public CommandParser(String baseText) throws ExceptionInInitializerError {
-        commands = parseText(baseText);
+    public CommandParser(String commandsText) {
+        scanner = new Scanner(commandsText);
     }
-    public List<Command> getCommands() { return commands; }
-    private List<Command> parseText(String baseText) throws ExceptionInInitializerError {
-        List<Command> commands = new LinkedList<Command>();
-        List<String> baseWords = Arrays.asList(baseText.split("[ \n\t]"));
-        ListIterator<String> wordsIterator = baseWords.listIterator();
-        while(wordsIterator.hasNext()) {
-            try {
-                String s = wordsIterator.next();
-                ECommands c = ECommands.getCommand(s);
-                switch(ECommands.getType(c)) {
-                    case UNARY :
-                        commands.add(new Command(c));
-                        break;
-                    case BINARY :
-                        if(wordsIterator.hasNext()) {
-                            String s2 = wordsIterator.next();
-                            if(!s2.matches("-?(0|[1-9]\\d*)"))
-                                throw new ExceptionInInitializerError();
-                            int n = Integer.parseInt(s2);
-                            commands.add(new Command(c, n));
-                        }
-                        break;
-                    default : throw new ExceptionInInitializerError();
-                }
-            } catch (IllegalArgumentException e) {
-                throw new ExceptionInInitializerError();
+
+    public List<Command> parseCommands() {
+        List<Command> commands = new LinkedList<>();
+        try {
+            while (scanner.hasNext()) {
+                token = scanner.next();
+                commands.add(parseSingleCommand());
             }
+        } catch (NoSuchElementException e) {
+            throw new IllegalArgumentException("No value specified for " + token);
+        } catch (IllegalStateException e) {
+            throw new IllegalArgumentException(e.getMessage());
         }
         return commands;
+    }
+
+    private Command parseSingleCommand() {
+        switch (token) {
+            case "np":
+                return new ForwardCommand(getNextDouble());
+
+            case "ws":
+                return new BackwardCommand(getNextDouble());
+
+            case "lw":
+                return new RotateCommand(-getNextInt());
+
+            case "pw":
+                return new RotateCommand(getNextInt());
+
+            case "pod":
+                return new SetMarkerStateCommand(EMarkerState.UP);
+
+            case "opu":
+                return new SetMarkerStateCommand(EMarkerState.DOWN);
+
+            default:
+                throw new IllegalStateException("Unrecognized command found: " + token);
+        }
+    }
+
+    private double getNextDouble() {
+        return scanner.nextDouble();
+    }
+
+    private int getNextInt() {
+        return scanner.nextInt();
     }
 }

@@ -2,6 +2,7 @@ package pl.edu.agh.to2.parser;
 
 import pl.edu.agh.to2.model.Board;
 import pl.edu.agh.to2.model.Exercise;
+import pl.edu.agh.to2.model.commands.Command;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -37,8 +38,8 @@ public class ExerciseParser {
         try {
             CommandParser parser = new CommandParser(exerciseText);
             Board board = new Board();
-            List<Command> commands = parser.getCommands();
-            board.update(commands);
+            List<Command> commands = parser.parseCommands();
+            board.executeCommands(commands);
             return new Exercise(board.getVectors(), commands.size());
         } catch (ExceptionInInitializerError e) {
             throw new IllegalArgumentException("Passed text is not a valid exercise text", e);

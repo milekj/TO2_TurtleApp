@@ -3,8 +3,9 @@ package pl.edu.agh.to2.presenter;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import pl.edu.agh.to2.model.Board;
-import pl.edu.agh.to2.parser.Command;
+import pl.edu.agh.to2.model.commands.Command;
 import pl.edu.agh.to2.parser.CommandParser;
+import pl.edu.agh.to2.parser.OldCommandParser;
 
 import java.util.List;
 
@@ -26,8 +27,8 @@ public class CommandLinePresenter {
 
     @FXML
     private void onSubmit() {
-        List<Command> commands = new CommandParser(commandsInput.getText()).getCommands();
-        board.update(commands);
+        List<Command> commands = new CommandParser((commandsInput.getText())).parseCommands();
+        board.executeCommands(commands);
 
         //only for demo, will be changed later
         System.out.println(board.getExercise());
