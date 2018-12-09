@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Label?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="pl.edu.agh.to2.presenter.ExercisePresenter"
+            style="-fx-background-color:lightgrey"
+            prefHeight="300.0" prefWidth="120.0">
+    <center>
+        <!--<Canvas fx:id="canvas" height="100.0" width="100.0" />-->
+        <Label fx:id="result"/>
+    </center>
+</BorderPane>

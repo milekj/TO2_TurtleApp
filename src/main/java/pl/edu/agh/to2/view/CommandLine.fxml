@@ -11,15 +11,15 @@
             fx:controller="pl.edu.agh.to2.presenter.CommandLinePresenter"
             prefHeight="100.0" prefWidth="600.0">
         <left>
-            <TextArea fx:id="commandsInput" prefHeight="100.0" prefWidth="500.0" />
+            <TextArea fx:id="commandsInput" prefHeight="100.0" prefWidth="480.0" />
         </left>
         <right>
             <BorderPane>
                 <top>
-                    <Button text="Clear" onAction="#onReset" prefHeight="50.0" prefWidth="100.0" />
+                    <Button text="Clear" onAction="#onReset" prefHeight="50.0" prefWidth="120.0" />
                 </top>
                 <bottom>
-                    <Button text="Run" onAction="#onSubmit" prefHeight="50.0" prefWidth="100.0" />
+                    <Button text="Run" onAction="#onSubmit" prefHeight="50.0" prefWidth="120.0" />
                 </bottom>
             </BorderPane>
         </right>
