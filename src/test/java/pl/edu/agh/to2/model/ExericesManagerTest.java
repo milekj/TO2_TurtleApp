@@ -78,7 +78,6 @@ class ExericesManagerTest {
 
     @Test
     void testHasNext() {
-        System.out.println(exerciseFilePathname);
         assertTrue(manager.hasNext());
         manager.moveToNext();
         assertTrue(manager.hasNext());

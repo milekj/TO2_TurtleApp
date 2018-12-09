@@ -1,5 +1,6 @@
 package pl.edu.agh.to2.model;
 import pl.edu.agh.to2.model.geometry.DisjointVectorsCollection;
+import pl.edu.agh.to2.model.geometry.Utilities;
 import pl.edu.agh.to2.model.geometry.Vector;
 
 import java.util.List;
@@ -36,6 +37,10 @@ public class Exercise {
 
     public Set<Vector> getVectors() {
         return vectors;
+    }
+
+    public void clearGrade() {
+        grade = UNSOLVED;
     }
 
     @Override

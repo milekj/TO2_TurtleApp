@@ -12,4 +12,10 @@ public class Utilities {
     public static BigDecimal newBigDecimal(double val) {
         return new BigDecimal(val).setScale(decimalPrecision, BigDecimal.ROUND_HALF_UP);
     }
+
+    public static int compareAsBigDecimals(double a, double b) {
+        BigDecimal aApprox = newBigDecimal(a);
+        BigDecimal bApprox = newBigDecimal(b);
+        return aApprox.compareTo(bApprox);
+    }
 }

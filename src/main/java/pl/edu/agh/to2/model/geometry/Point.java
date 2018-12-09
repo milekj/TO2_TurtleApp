@@ -3,26 +3,23 @@ package pl.edu.agh.to2.model.geometry;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+import static pl.edu.agh.to2.model.geometry.Utilities.*;
+
 public class Point {
-    private final BigDecimal x;
-    private final BigDecimal y;
+    private final double x;
+    private final double y;
 
     public Point(double x, double y) {
-        this.x = Utilities.newBigDecimal(x);
-        this.y = Utilities.newBigDecimal(y);
-    }
-
-    public Point(BigDecimal x, BigDecimal y) {
         this.x = x;
         this.y = y;
     }
 
-    public BigDecimal getDistance(Point other) {
-        BigDecimal deltaX = x.subtract(other.x);
-        BigDecimal deltaY = y.subtract(other.y);
-        double deltaXSquare = deltaX.multiply(deltaX).doubleValue();
-        double deltaYSquare = deltaY.multiply(deltaY).doubleValue();
-        return Utilities.newBigDecimal(Math.sqrt(deltaXSquare + deltaYSquare));
+    public double getDistance(Point other) {
+        double deltaX = x - other.x;
+        double deltaY = y - other.y;
+        double deltaXSquare = deltaX * deltaX;
+        double deltaYSquare = deltaY * deltaY;
+        return Math.sqrt(deltaXSquare + deltaYSquare);
     }
 
     @Override
@@ -32,21 +29,21 @@ public class Point {
         if (!(o instanceof Point))
             return false;
         Point point = (Point) o;
-        return x.compareTo(point.x) == 0  &&
-                y.compareTo(point.y) == 0;
+        return compareAsBigDecimals(x, point.x) == 0  &&
+                compareAsBigDecimals(y, point.y) == 0;
     }
 
-    public BigDecimal getX() {
+    public double getX() {
         return x;
     }
 
-    public BigDecimal getY() {
+    public double getY() {
         return y;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(x, y);
+        return Objects.hash(newBigDecimal(x), newBigDecimal(y));
     }
 
     @Override
