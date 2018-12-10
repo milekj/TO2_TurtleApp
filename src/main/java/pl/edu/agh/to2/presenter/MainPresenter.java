@@ -5,8 +5,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import pl.edu.agh.to2.model.Board;
 import pl.edu.agh.to2.model.Exercise;
-import pl.edu.agh.to2.model.ExerciseGrade;
-import pl.edu.agh.to2.model.ExericesManager;
+import pl.edu.agh.to2.model.ExercisesManager;
 
 import java.util.List;
 
@@ -48,7 +47,7 @@ public class MainPresenter {
         });
     }
 
-    public void setExerciseManager(ExericesManager manager) {
+    public void setExerciseManager(ExercisesManager manager) {
         exerciseController.setExercisesManager(manager);
     }
 }

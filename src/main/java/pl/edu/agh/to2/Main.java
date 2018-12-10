@@ -6,7 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import pl.edu.agh.to2.model.Board;
-import pl.edu.agh.to2.model.ExericesManager;
+import pl.edu.agh.to2.model.ExercisesManager;
 import pl.edu.agh.to2.presenter.MainPresenter;
 
 import java.io.IOException;
@@ -23,8 +23,7 @@ public class Main extends Application {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Turtle App");
 
-        ExericesManager manager = new ExericesManager("ex");
-        manager.moveToNext();
+        ExercisesManager manager = new ExercisesManager("ex");
         Board board = new Board(manager.getCurrent());
 
         try {

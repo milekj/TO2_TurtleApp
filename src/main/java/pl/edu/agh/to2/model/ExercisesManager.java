@@ -3,52 +3,51 @@ package pl.edu.agh.to2.model;
 import pl.edu.agh.to2.parser.ExerciseParser;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.nio.file.*;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class ExericesManager {
-    private LinkedList<Exercise> exercises;
-    private ListIterator<Exercise> iterator;
-    private Exercise current;
+public class ExercisesManager {
+    private ArrayList<Exercise> exercises;
+    private int current;
 
-    public ExericesManager(String filePath) {
+    public ExercisesManager(String filePath) {
         try {
-            exercises = getExercisesFromFile(filePath);
-            iterator = exercises.listIterator();
+            exercises = new ArrayList<>(getExercisesFromFile(filePath));
+            current = 0;
         } catch (IOException e) {
             throw new IllegalArgumentException("IO error while reading exercises from file ", e);
         }
     }
 
     public Exercise getCurrent() {
-        return current;
+        return exercises.get(current);
     }
 
     public boolean hasNext() {
-        return iterator.hasNext();
+        return isInRange(current + 1);
     }
 
     public boolean hasPrevious() {
-        return iterator.hasPrevious();
+        return isInRange(current - 1);
     }
 
     public Exercise moveToNext() {
         if(hasNext())
-            current = iterator.next();
-        return current;
+            current++;
+        return getCurrent();
     }
 
     public Exercise moveToPrevious() {
-        if(!hasNext())
-            iterator.previous();
         if(hasPrevious()) {
-            current = iterator.previous();
+            current--;
         }
-        return current;
+        return getCurrent();
     }
 
     private LinkedList<Exercise> getExercisesFromFile(String filePath) throws IOException{
@@ -57,5 +56,9 @@ public class ExericesManager {
                             .collect(Collectors.joining("\n"));
             ExerciseParser parser = new ExerciseParser(text);
             return parser.getAllExercises();
+    }
+
+    private boolean isInRange(int i) {
+        return i >= 0 && i < exercises.size();
     }
 }

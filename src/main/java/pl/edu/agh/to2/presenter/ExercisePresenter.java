@@ -5,20 +5,19 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
-import pl.edu.agh.to2.model.Board;
 import pl.edu.agh.to2.model.Exercise;
 import pl.edu.agh.to2.model.ExerciseGrade;
-import pl.edu.agh.to2.model.ExericesManager;
+import pl.edu.agh.to2.model.ExercisesManager;
 
 public class ExercisePresenter {
-    private ExericesManager manager;
+    private ExercisesManager manager;
     private SimpleObjectProperty<Exercise> exercise;
 
     public ExercisePresenter() {
         exercise = new SimpleObjectProperty<Exercise>();
     }
 
-    public void setExercisesManager(ExericesManager manager) {
+    public void setExercisesManager(ExercisesManager manager) {
         this.manager = manager;
         exercise.setValue(manager.getCurrent());
         updateButtons();

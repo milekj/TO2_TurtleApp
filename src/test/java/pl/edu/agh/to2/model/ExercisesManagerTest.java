@@ -11,14 +11,13 @@ import java.io.IOException;
 import java.io.Writer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ExericesManagerTest {
-    private static ExericesManager manager;
+class ExercisesManagerTest {
+    private static ExercisesManager manager;
     private static String exerciseFilePathname;
     private static List<Exercise> expectedExercises;
 
@@ -50,7 +49,7 @@ class ExericesManagerTest {
 
     @BeforeEach
     void setUpSingleTest(){
-        manager = new ExericesManager(exerciseFilePathname);
+        manager = new ExercisesManager(exerciseFilePathname);
     }
 
     @Test
