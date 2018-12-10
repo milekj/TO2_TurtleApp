@@ -14,12 +14,12 @@ class RotateCommandTest {
         RotateCommand command = new RotateCommand(90);
         command.execute(board);
         assertEquals(180, turtle.getAngleDegrees());
-        assertEquals(1, board.getCommandsNumber());
+        assertEquals(1, command.getCommandsNumber());
 
         command = new RotateCommand(-90);
         command.execute(board);
         assertEquals(90, turtle.getAngleDegrees());
-        assertEquals(2, board.getCommandsNumber());
+        assertEquals(1, command.getCommandsNumber());
     }
 
 }

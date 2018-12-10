@@ -25,7 +25,7 @@ class BackwardCommandTest {
         List<Vector> expectedVectors = Collections.singletonList(newVector);
         assertEquals(expectedPosition, turtle.getPosition());
         assertEquals(expectedVectors, board.getVectors());
-        assertEquals(1, board.getCommandsNumber());
+        assertEquals(1, command.getCommandsNumber());
         assertEquals(90, turtle.getAngleDegrees());
 
         board = new Board();
@@ -36,7 +36,7 @@ class BackwardCommandTest {
         expectedPosition = new Point(-10, 0);
         assertEquals(expectedPosition, turtle.getPosition());
         assertTrue(board.getVectors().isEmpty());
-        assertEquals(1, board.getCommandsNumber());
+        assertEquals(1, command.getCommandsNumber());
         assertEquals(90, turtle.getAngleDegrees());
     }
 }

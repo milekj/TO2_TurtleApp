@@ -46,10 +46,6 @@ public class Exercise implements Serializable {
         return vectors;
     }
 
-    public void clearGrade() {
-        grade = UNSOLVED;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (!(o instanceof Exercise)) return false;

@@ -1,6 +1,5 @@
-package pl.edu.agh.to2.parser;
+package pl.edu.agh.to2.parsers;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import pl.edu.agh.to2.model.Exercise;
 import pl.edu.agh.to2.model.geometry.Point;

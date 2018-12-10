@@ -101,7 +101,7 @@ class ExerciseTest {
         assertEquals(expected, ex3.evaluate(Arrays.asList(v8, v9, v10), 4));
         expected = IDEAL;
         assertEquals(expected, ex3.evaluate(Arrays.asList(v8, v9, v10), 3));
-        expected = UNSOLVED;
+        expected = IDEAL;
         assertEquals(expected, ex3.evaluate(Collections.singletonList(v7), 1));
         //triangle
 

@@ -15,11 +15,11 @@ class SetMarkerStateCommandTest {
         SetMarkerStateCommand command = new SetMarkerStateCommand(EMarkerState.UP);
         command.execute(board);
         assertEquals(EMarkerState.UP, turtle.getMarkerState());
-        assertEquals(1, board.getCommandsNumber());
+        assertEquals(1, command.getCommandsNumber());
 
         command = new SetMarkerStateCommand(EMarkerState.DOWN);
         command.execute(board);
         assertEquals(EMarkerState.DOWN, turtle.getMarkerState());
-        assertEquals(2, board.getCommandsNumber());
+        assertEquals(1, command.getCommandsNumber());
     }
 }

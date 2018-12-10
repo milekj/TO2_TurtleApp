@@ -8,6 +8,7 @@ import javafx.scene.paint.Color;
 import pl.edu.agh.to2.model.Exercise;
 import pl.edu.agh.to2.model.ExerciseGrade;
 import pl.edu.agh.to2.model.ExercisesManager;
+import pl.edu.agh.to2.persistence.ExerciseMangerSerializer;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
@@ -75,17 +76,7 @@ public class ExercisePresenter {
     }
 
     private void saveGrades() {
-        ObjectOutputStream oos = null;
-        FileOutputStream fout = null;
-
-        try {
-            fout = new FileOutputStream("grades", false);
-            oos = new ObjectOutputStream(fout);
-            oos.writeObject(manager);
-            oos.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        ExerciseMangerSerializer.saveExcercises(manager);
     }
 
     public SimpleObjectProperty<Exercise> exercise() {

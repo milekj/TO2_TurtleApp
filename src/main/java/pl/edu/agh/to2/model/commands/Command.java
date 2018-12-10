@@ -8,7 +8,6 @@ public abstract class Command {
 
     public void execute(Board board) {
         turtle = board.getTurtle();
-        board.incrementCommandsNumber();
     }
 
     public int getCommandsNumber() {

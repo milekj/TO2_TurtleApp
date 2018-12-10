@@ -1,4 +1,4 @@
-package pl.edu.agh.to2.parser;
+package pl.edu.agh.to2.parsers;
 
 import pl.edu.agh.to2.model.Board;
 import pl.edu.agh.to2.model.Exercise;

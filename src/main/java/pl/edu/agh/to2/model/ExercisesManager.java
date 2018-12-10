@@ -1,17 +1,13 @@
 package pl.edu.agh.to2.model;
 
-import pl.edu.agh.to2.parser.ExerciseParser;
+import pl.edu.agh.to2.parsers.ExerciseParser;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.lang.reflect.Array;
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ExercisesManager implements Serializable {
     private ArrayList<Exercise> exercises;

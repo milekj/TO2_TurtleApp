@@ -4,7 +4,6 @@ import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import pl.edu.agh.to2.model.commands.Command;
-import pl.edu.agh.to2.model.geometry.Point;
 import pl.edu.agh.to2.model.geometry.Vector;
 
 import java.util.LinkedList;
@@ -30,19 +29,8 @@ public class Board implements ObservableValue<Board>{
         this.exercise = exercise;
     }
 
-    public void clear() {
-        turtle = new Turtle();
-        vectors = new LinkedList<>();
-        commandsNumber = 0;
-        notifyListeners();
-    }
-
     public void addVector(Vector vector) {
         vectors.add(vector);
-    }
-
-    public void incrementCommandsNumber() {
-        commandsNumber++;
     }
 
     public ExerciseGrade getExerciseGrade() {
@@ -79,8 +67,14 @@ public class Board implements ObservableValue<Board>{
                 commandsNumber += c.getCommandsNumber();
                 notifyListeners();
             }
-
         }
+    }
+
+    private void clear() {
+        turtle = new Turtle();
+        vectors = new LinkedList<>();
+        commandsNumber = 0;
+        notifyListeners();
     }
 
     private void notifyListeners() {

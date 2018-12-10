@@ -3,7 +3,7 @@ package pl.edu.agh.to2.model;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pl.edu.agh.to2.parser.ExerciseParser;
+import pl.edu.agh.to2.parsers.ExerciseParser;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -54,9 +54,7 @@ class ExercisesManagerTest {
 
     @Test
     void testMoveToNext() {
-        Exercise expected = expectedExercises.get(0);
-        assertEquals(expected, manager.moveToNext());
-        expected = expectedExercises.get(1);
+        Exercise expected = expectedExercises.get(1);
         assertEquals(expected, manager.moveToNext());
         expected = expectedExercises.get(2);
         assertEquals(expected, manager.moveToNext());
@@ -77,8 +75,6 @@ class ExercisesManagerTest {
 
     @Test
     void testHasNext() {
-        assertTrue(manager.hasNext());
-        manager.moveToNext();
         assertTrue(manager.hasNext());
         manager.moveToNext();
         assertTrue(manager.hasNext());
