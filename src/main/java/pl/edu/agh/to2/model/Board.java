@@ -58,6 +58,11 @@ public class Board implements ObservableValue<Board>{
         return exercise;
     }
 
+    public void setExercise(Exercise exercise) {
+        this.exercise = exercise;
+        clear();
+    }
+
     public LinkedList<Vector> getVectors() {
         return vectors;
     }
@@ -67,9 +72,13 @@ public class Board implements ObservableValue<Board>{
     }
 
     public void executeCommands(List<Command> commands) {
-        for (Command c : commands)
-            c.execute(this);
-        notifyListeners();
+        if (commands.isEmpty()) {
+            clear();
+        } else {
+            for (Command c : commands)
+                c.execute(this);
+            notifyListeners();
+        }
     }
 
     private void notifyListeners() {

@@ -8,40 +8,44 @@ import pl.edu.agh.to2.model.ExerciseGrade;
 import pl.edu.agh.to2.model.commands.Command;
 import pl.edu.agh.to2.parser.CommandParser;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class CommandLinePresenter {
-    private Board board;
-
-    public void setBoard(Board board) {
-        this.board = board;
-    }
-
     @FXML
     private TextArea commandsInput;
 
+    private SimpleObjectProperty<List> commands;
     private SimpleObjectProperty<ExerciseGrade> exerciseGrade;
 
     public CommandLinePresenter() {
+        commands = new SimpleObjectProperty<List>();
         exerciseGrade = new SimpleObjectProperty<ExerciseGrade>();
+    }
+
+    public void clear() {
+        onReset();
     }
 
     @FXML
     private void onReset() {
         commandsInput.clear();
-        board.clear();
+        commands.setValue(new LinkedList<>());
     }
 
     @FXML
     private void onSubmit() {
-        List<Command> commands = new CommandParser((commandsInput.getText())).parseCommands();
-        board.executeCommands(commands);
+        commands.setValue(new CommandParser((commandsInput.getText())).parseCommands());
 
-        exerciseGrade.set(board.getExerciseGrade());
+        //exerciseGrade.set(board.getExerciseGrade());
 
         //only for demo, will be changed later
-        System.out.println(board.getExercise());
-        System.out.println("Is exercise passed?: " + board.getExerciseGrade());
+        //System.out.println(board.getExercise());
+        //System.out.println("Is exercise passed?: " + board.getExerciseGrade());
+    }
+
+    public SimpleObjectProperty<List> commands() {
+        return commands;
     }
 
     public SimpleObjectProperty<ExerciseGrade> exerciseGrade() {

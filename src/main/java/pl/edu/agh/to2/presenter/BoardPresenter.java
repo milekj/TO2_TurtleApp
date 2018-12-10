@@ -11,6 +11,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.transform.Rotate;
 import pl.edu.agh.to2.model.Board;
 import pl.edu.agh.to2.model.EMarkerState;
+import pl.edu.agh.to2.model.Exercise;
+import pl.edu.agh.to2.model.commands.Command;
 import pl.edu.agh.to2.model.geometry.Point;
 import pl.edu.agh.to2.model.geometry.Vector;
 import pl.edu.agh.to2.model.Turtle;
@@ -50,6 +52,15 @@ public class BoardPresenter implements Initializable {
         this.board = board;
         board.addListener((boardValue, oldBoard, newBoard) -> render());
         render();
+    }
+
+    public void setExercise(Exercise exercise) {
+        this.board.setExercise(exercise);
+        render();
+    }
+
+    public void executeCommands(List<Command> commands) {
+        board.executeCommands(commands);
     }
 
     private void render() {

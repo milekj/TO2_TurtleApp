@@ -25,8 +25,6 @@ public class Main extends Application {
 
         ExericesManager manager = new ExericesManager("ex");
         manager.moveToNext();
-        manager.moveToNext();
-        manager.moveToNext();
         Board board = new Board(manager.getCurrent());
 
         try {
@@ -36,6 +34,7 @@ public class Main extends Application {
 
             MainPresenter mainPresenter = loader.getController();
             mainPresenter.setBoard(board);
+            mainPresenter.setExerciseManager(manager);
 
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
