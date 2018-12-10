@@ -10,4 +10,8 @@ public abstract class Command {
         turtle = board.getTurtle();
         board.incrementCommandsNumber();
     }
+
+    public int getCommandsNumber() {
+        return 1;
+    }
 }

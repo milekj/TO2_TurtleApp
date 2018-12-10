@@ -40,7 +40,7 @@ public class ExerciseParser {
             Board board = new Board();
             List<Command> commands = parser.parseCommands();
             board.executeCommands(commands);
-            return new Exercise(board.getVectors(), commands.size());
+            return new Exercise(board.getVectors(), board.getCommandsNumber());
         } catch (ExceptionInInitializerError e) {
             throw new IllegalArgumentException("Passed text is not a valid exercise text", e);
         }

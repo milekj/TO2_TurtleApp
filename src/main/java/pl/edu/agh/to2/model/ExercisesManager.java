@@ -44,9 +44,8 @@ public class ExercisesManager {
     }
 
     public Exercise moveToPrevious() {
-        if(hasPrevious()) {
+        if(hasPrevious())
             current--;
-        }
         return getCurrent();
     }
 
