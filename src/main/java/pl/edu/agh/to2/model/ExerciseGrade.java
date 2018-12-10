@@ -1,7 +1,7 @@
 package pl.edu.agh.to2.model;
 
 public enum ExerciseGrade {
-    IDEAL,
+    UNSOLVED,
     SOLVED,
-    UNSOLVED
+    IDEAL
 }

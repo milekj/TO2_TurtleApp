@@ -22,16 +22,22 @@ public class Exercise {
     }
 
     public ExerciseGrade evaluate(List<Vector> testedVectors, int commandsNumber) {
+        ExerciseGrade newGrade;
         DisjointVectorsCollection disjointVectors = new DisjointVectorsCollection(testedVectors);
         Set<Vector> testedVectorsSet = disjointVectors.getVectorsSet();
         if (vectors.equals(testedVectorsSet)) {
             if(commandsNumber <= this.commandsNumber)
-                grade = IDEAL;
+                newGrade = IDEAL;
             else
-                grade = SOLVED;
+                newGrade = SOLVED;
         }
         else
-            grade = UNSOLVED;
+            newGrade = UNSOLVED;
+
+        if (newGrade.compareTo(grade) > 0) {
+            grade = newGrade;
+        }
+
         return grade;
     }
 
