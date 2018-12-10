@@ -20,7 +20,7 @@ public class CommandParser {
             while (scanner.hasNext()) {
                 token = scanner.next();
                 if(token.equals("loop"))
-                    commands.addAll(parseLoopCommand());
+                    commands.add(parseLoopCommand());
                 else
                     commands.add(parseSingleCommand());
             }
@@ -57,23 +57,15 @@ public class CommandParser {
         }
     }
 
-    /**
-     * Executes n times commands from loop statement
-     *
-     * How does it work?
-     * 1. Creates String from commands inside loop
-     * 2. Executes n times parseCommands() with that String
-     * @return list of commands from loop copied n times
-     */
-    private List<Command> parseLoopCommand() {
+    private Command parseLoopCommand() {
         /** [String with commands] variables */
         String loopSyntax = "<loop> <number> <[> <commands> <]>";
         int innerLoops = 0;
         String token;
+        String loopCommands = "";
 
         /** [List of commands] variables */
         int loops = getNextInt();
-        String loopCommands = "";
 
         /**
          * Prepare [String with commands] from loop statement
@@ -93,14 +85,7 @@ public class CommandParser {
         if(innerLoops != -1)
             throw new IllegalStateException("Validated loop syntax: " + loopSyntax);
 
-        /**
-         * Prepare [List of commands] from [String with commands]
-         */
-        List<Command> commands = new LinkedList<>();
-        for(int i = 0; i < loops; i++)
-            commands.addAll(new CommandParser(loopCommands).parseCommands());
-
-        return commands;
+        return new LoopCommand(loopCommands, loops);
     }
 
     private double getNextDouble() {
