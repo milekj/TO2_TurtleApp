@@ -19,10 +19,7 @@ public class CommandParser {
         try {
             while (scanner.hasNext()) {
                 token = scanner.next();
-                if(token.equals("loop"))
-                    commands.add(parseLoopCommand());
-                else
-                    commands.add(parseSingleCommand());
+                commands.add(parseSingleCommand());
             }
         } catch (NoSuchElementException e) {
             throw new IllegalArgumentException("No value specified for " + token);
@@ -52,40 +49,38 @@ public class CommandParser {
             case "opu":
                 return new SetMarkerStateCommand(EMarkerState.DOWN);
 
+            case "powtórz":
+                return parseLoopCommand();
+
             default:
                 throw new IllegalStateException("Unrecognized command found: " + token);
         }
     }
 
     private Command parseLoopCommand() {
-        /** [String with commands] variables */
-        String loopSyntax = "<loop> <number> <[> <commands> <]>";
-        int innerLoops = 0;
-        String token;
-        String loopCommands = "";
+        int repeatsCount = getNextInt();
+        String loopToken = scanner.next();
+        if (!loopToken.equals("["))
+            throw new IllegalStateException("No `[` after loop count");
+        return new LoopCommand(getLoopBodyCommands(), repeatsCount);
+    }
 
-        /** [List of commands] variables */
-        int loops = getNextInt();
-
-        /**
-         * Prepare [String with commands] from loop statement
-         */
-        if(!scanner.next().equals("["))
-            throw new IllegalStateException("Validated loop syntax: " + loopSyntax);
-        while( (innerLoops >= 0) && (scanner.hasNext()) ) {
-            token = scanner.next();
-            if(token.equals("loop"))
-                innerLoops++;
-            if(token.equals("]"))
-                innerLoops--;
-            if(innerLoops == -1)
-                break;
-            loopCommands = loopCommands + " " + token;
+    private List<Command> getLoopBodyCommands() {
+        StringBuilder loopBody = new StringBuilder();
+        int bracesCount = 1;
+        while (scanner.hasNext()) {
+            String loopToken = scanner.next();
+            if (loopToken.equals("["))
+                bracesCount ++;
+            else if (loopToken.equals("]")) {
+                bracesCount--;
+                if(bracesCount == 0)
+                    return new CommandParser(loopBody.toString()).parseCommands();
+            }
+            loopBody.append(" ")
+                    .append(loopToken);
         }
-        if(innerLoops != -1)
-            throw new IllegalStateException("Validated loop syntax: " + loopSyntax);
-
-        return new LoopCommand(loopCommands, loops);
+        throw new IllegalStateException("No matching `]` for `[`");
     }
 
     private double getNextDouble() {

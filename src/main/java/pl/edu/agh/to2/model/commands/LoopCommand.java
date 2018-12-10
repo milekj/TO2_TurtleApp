@@ -8,6 +8,7 @@ import pl.edu.agh.to2.parser.CommandParser;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Executes n times commands from loop statement
@@ -18,20 +19,28 @@ import java.util.List;
  * @return list of commands from loop copied n times
  */
 public class LoopCommand extends Command {
-    private String commands;
+    private List<Command> commands;
     private int loops;
 
-    public LoopCommand(String commands, int loops) {
+    public LoopCommand(List<Command> commands, int loops) {
         this.commands = commands;
         this.loops = loops;
     }
-
 
     @Override
     public void execute(Board board) {
         super.execute(board);
         for(int i = 0; i < loops; i++) {
-            new CommandParser(commands).parseCommands();
+            for(Command c : commands)
+                c.execute(board);
         }
+    }
+
+    @Override
+    public int getCommandsNumber() {
+        return 1 +
+            commands.stream()
+                    .mapToInt(Command::getCommandsNumber)
+                    .sum();
     }
 }

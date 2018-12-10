@@ -74,9 +74,12 @@ public class Board implements ObservableValue<Board>{
         if (commands.isEmpty()) {
             clear();
         } else {
-            for (Command c : commands)
+            for (Command c : commands) {
                 c.execute(this);
-            notifyListeners();
+                commandsNumber += c.getCommandsNumber();
+                notifyListeners();
+            }
+
         }
     }
 
