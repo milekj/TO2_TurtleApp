@@ -1,5 +1,6 @@
 package pl.edu.agh.to2.model.geometry;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 import static java.lang.Math.*;
@@ -7,7 +8,7 @@ import static pl.edu.agh.to2.model.geometry.Utilities.FULL_ANGLE_DEGREES;
 import static pl.edu.agh.to2.model.geometry.Utilities.compareAsBigDecimals;
 import static pl.edu.agh.to2.model.geometry.Utilities.newBigDecimal;
 
-public class Vector {
+public class Vector implements Serializable {
     private Point start;
     private Point end;
     private double length;

@@ -9,6 +9,9 @@ import pl.edu.agh.to2.model.Exercise;
 import pl.edu.agh.to2.model.ExerciseGrade;
 import pl.edu.agh.to2.model.ExercisesManager;
 
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
+
 public class ExercisePresenter {
     private ExercisesManager manager;
     private SimpleObjectProperty<Exercise> exercise;
@@ -33,6 +36,8 @@ public class ExercisePresenter {
     private Button next;
 
     public void onBoardChange(ExerciseGrade exerciseGrade) {
+        saveGrades();
+
         Color color;
         switch (exerciseGrade) {
             case UNSOLVED:
@@ -67,6 +72,20 @@ public class ExercisePresenter {
     private void updateButtons() {
         prev.setDisable(!manager.hasPrevious());
         next.setDisable(!manager.hasNext());
+    }
+
+    private void saveGrades() {
+        ObjectOutputStream oos = null;
+        FileOutputStream fout = null;
+
+        try {
+            fout = new FileOutputStream("grades", false);
+            oos = new ObjectOutputStream(fout);
+            oos.writeObject(manager);
+            oos.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public SimpleObjectProperty<Exercise> exercise() {

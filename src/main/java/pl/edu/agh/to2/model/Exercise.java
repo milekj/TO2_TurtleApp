@@ -3,13 +3,14 @@ import pl.edu.agh.to2.model.geometry.DisjointVectorsCollection;
 import pl.edu.agh.to2.model.geometry.Utilities;
 import pl.edu.agh.to2.model.geometry.Vector;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 import static pl.edu.agh.to2.model.ExerciseGrade.*;
 
-public class Exercise {
+public class Exercise implements Serializable {
     private Set<Vector> vectors;
     private ExerciseGrade grade;
     private int commandsNumber;

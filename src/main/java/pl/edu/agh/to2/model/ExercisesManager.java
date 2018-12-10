@@ -3,6 +3,7 @@ package pl.edu.agh.to2.model;
 import pl.edu.agh.to2.parser.ExerciseParser;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.nio.file.*;
 import java.util.ArrayList;
@@ -12,7 +13,7 @@ import java.util.ListIterator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class ExercisesManager {
+public class ExercisesManager implements Serializable {
     private ArrayList<Exercise> exercises;
     private int current;
 

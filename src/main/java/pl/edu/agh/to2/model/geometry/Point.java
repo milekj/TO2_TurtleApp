@@ -1,11 +1,12 @@
 package pl.edu.agh.to2.model.geometry;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 
 import static pl.edu.agh.to2.model.geometry.Utilities.*;
 
-public class Point {
+public class Point implements Serializable {
     private final double x;
     private final double y;
 

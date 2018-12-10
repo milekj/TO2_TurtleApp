@@ -9,7 +9,9 @@ import pl.edu.agh.to2.model.Board;
 import pl.edu.agh.to2.model.ExercisesManager;
 import pl.edu.agh.to2.presenter.MainPresenter;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 
 public class Main extends Application {
     private Stage primaryStage;
@@ -23,7 +25,19 @@ public class Main extends Application {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Turtle App");
 
-        ExercisesManager manager = new ExercisesManager("ex");
+        ExercisesManager manager;
+        ObjectInputStream ois = null;
+        
+        try {
+            FileInputStream fin = new FileInputStream("grades");
+            ois = new ObjectInputStream(fin);
+            manager = (ExercisesManager) ois.readObject();
+            ois.close();
+        } catch (Exception e) {
+            //e.printStackTrace();
+            manager = new ExercisesManager("ex");
+        }
+
         Board board = new Board(manager.getCurrent());
 
         try {
