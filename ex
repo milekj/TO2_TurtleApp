@@ -1,1 +1,1 @@
-np 100 pw 90 np 100 pw 90 np 100 pw 90 np 100 pw 90/np 100 lw 120 np 100 lw 120 np 100 lw 120/np 60 lw 72 np 60 lw 72 np 60 lw 72 np 60 lw 72 np 60 lw 72
+loop 4 [ np 100 pw 90 ]/loop 3 [ np 100 lw 120 ]/loop 5 [ np 60 lw 72 ]
