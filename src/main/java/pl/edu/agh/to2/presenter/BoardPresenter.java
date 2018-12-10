@@ -95,11 +95,11 @@ public class BoardPresenter implements Initializable {
         }
     }
 
-    private double translateX(BigDecimal value) {
-        return value.doubleValue() + canvas.getWidth() / 2;
+    private double translateX(double value) {
+        return value + canvas.getWidth() / 2;
     }
 
-    private double translateY(BigDecimal value) {
-        return -1 * value.doubleValue() + canvas.getHeight() / 2;
+    private double translateY(double value) {
+        return -1 * value + canvas.getHeight() / 2;
     }
 }

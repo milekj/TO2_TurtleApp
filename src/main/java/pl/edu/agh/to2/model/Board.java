@@ -34,6 +34,7 @@ public class Board implements ObservableValue<Board>{
         turtle = new Turtle();
         vectors = new LinkedList<>();
         commandsNumber = 0;
+        exercise.clearGrade();
         notifyListeners();
     }
 
