@@ -1,6 +1,9 @@
 # LOGO
 Projekt realizowany w ramach ćwiczeń: Technologie Obiektowe 2
 
+## Uruchomienie programu
+Chcąc uruchomić projekt, należy użyć komendy: gradle run
+
 ## Cel ćwiczenia
 Celem tej aplikacji jest stworzenie platformy wspomagającej naukę programowania dla dzieci w wieku szkolnym. <br>
 Aplikacja ta podzielona będzie na dwie części:
