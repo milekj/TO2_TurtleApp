@@ -1,4 +1,4 @@
-package pl.edu.agh.to2.model;
+package pl.edu.agh.to2.model.geometry;
 
 import java.util.*;
 
@@ -21,6 +21,15 @@ public class DisjointVectorsCollection {
         }
     }
 
+    public void addAll(List<Vector> vectors) {
+        for(Vector v : vectors)
+            add(v);
+    }
+
+    public Set<Vector> getVectorsSet() {
+        return new HashSet<>(vectors);
+    }
+
     private Vector mergeWithAll(Vector current) {
         Iterator<Vector> it = vectors.iterator();
         while (it.hasNext()) {
@@ -34,14 +43,5 @@ public class DisjointVectorsCollection {
         }
         vectors.add(current);
         return null;
-    }
-
-    public void addAll(List<Vector> vectors) {
-        for(Vector v : vectors)
-            add(v);
-    }
-
-    public Set<Vector> getVectorsSet() {
-        return new HashSet<>(vectors);
     }
 }

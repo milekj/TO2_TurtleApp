@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.control.Label?>
+
+<?import javafx.scene.control.Button?>
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="pl.edu.agh.to2.presenter.ExercisePresenter"
+            style="-fx-background-color:lightgrey"
+            prefHeight="300.0" prefWidth="120.0">
+    <center>
+        <!--<Canvas fx:id="canvas" height="100.0" width="100.0" />-->
+        <Label fx:id="result"/>
+    </center>
+    <bottom>
+        <BorderPane xmlns="http://javafx.com/javafx"
+                    xmlns:fx="http://javafx.com/fxml"
+                    prefHeight="50.0" prefWidth="120.0">
+            <left>
+                <Button fx:id="prev" text="&lt;" disable="true" onAction="#onPrev" prefHeight="50.0" prefWidth="60.0" />
+            </left>
+            <right>
+                <Button fx:id="next" text="&gt;" disable="true" onAction="#onNext" prefHeight="50.0" prefWidth="60.0" />
+            </right>
+        </BorderPane>
+    </bottom>
+</BorderPane>

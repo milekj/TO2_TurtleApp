@@ -12,7 +12,17 @@
             fx:controller="pl.edu.agh.to2.presenter.MainPresenter"
             prefHeight="400.0" prefWidth="600.0">
     <top>
-        <fx:include fx:id="board" source="Board.fxml" />
+        <BorderPane xmlns="http://javafx.com/javafx"
+        xmlns:fx="http://javafx.com/fxml"
+        prefHeight="300.0" prefWidth="600.0">
+            <left>
+                <fx:include fx:id="board" source="Board.fxml" />
+            </left>
+            <right>
+                <fx:include fx:id="exercise" source="Exercise.fxml" />
+            </right>
+        </BorderPane>
+
     </top>
     <bottom>
         <fx:include fx:id="commandLine" source="CommandLine.fxml" />

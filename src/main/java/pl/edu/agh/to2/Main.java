@@ -2,18 +2,17 @@ package pl.edu.agh.to2;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import pl.edu.agh.to2.model.Board;
-import pl.edu.agh.to2.model.Exercise;
-import pl.edu.agh.to2.model.Utilities;
-import pl.edu.agh.to2.presenter.BoardPresenter;
-import pl.edu.agh.to2.presenter.CommandLinePresenter;
+import pl.edu.agh.to2.model.ExercisesManager;
+import pl.edu.agh.to2.persistence.ExerciseMangerSerializer;
 import pl.edu.agh.to2.presenter.MainPresenter;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 
 public class Main extends Application {
     private Stage primaryStage;
@@ -27,9 +26,8 @@ public class Main extends Application {
         this.primaryStage = primaryStage;
         this.primaryStage.setTitle("Turtle App");
 
-        Exercise squareExercise = Utilities.getExampleExercise();
-
-        Board board = new Board(squareExercise);
+        ExercisesManager manager = ExerciseMangerSerializer.getExerciseManager();
+        Board board = new Board(manager.getCurrent());
 
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -38,6 +36,7 @@ public class Main extends Application {
 
             MainPresenter mainPresenter = loader.getController();
             mainPresenter.setBoard(board);
+            mainPresenter.setExerciseManager(manager);
 
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);

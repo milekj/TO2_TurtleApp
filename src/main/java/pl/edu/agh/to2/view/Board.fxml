@@ -11,8 +11,8 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="pl.edu.agh.to2.presenter.BoardPresenter"
             style="-fx-background-color:white"
-            prefHeight="300.0" prefWidth="600.0">
+            prefHeight="300.0" prefWidth="480.0">
     <center>
-        <Canvas fx:id="canvas" height="300.0" width="600.0" />
+        <Canvas fx:id="canvas" height="300.0" width="480.0" />
     </center>
 </BorderPane>

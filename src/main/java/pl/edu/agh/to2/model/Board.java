@@ -3,69 +3,76 @@ package pl.edu.agh.to2.model;
 import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import pl.edu.agh.to2.parser.Command;
+import pl.edu.agh.to2.commands.Command;
+import pl.edu.agh.to2.commands.CommandRegistry;
+import pl.edu.agh.to2.model.geometry.Vector;
 
 import java.util.LinkedList;
 import java.util.List;
 
 public class Board implements ObservableValue<Board>{
     private Turtle turtle;
-    private DisjointVectorsCollection vectors;
+    private LinkedList<Vector> vectors;
     private Exercise exercise;
+    private CommandRegistry commandRegistry;
 
     private List<ChangeListener<? super Board>> listeners;
 
-    public Board(Exercise exercise) {
+    public Board() {
         turtle = new Turtle();
-        vectors = new DisjointVectorsCollection();
-        this.exercise = exercise;
+        vectors = new LinkedList<>();
         listeners = new LinkedList<>();
+        commandRegistry = new CommandRegistry();
+    }
+
+    public Board(Exercise exercise) {
+        this();
+        this.exercise = exercise;
+    }
+
+    public void addVector(Vector vector) {
+        vectors.add(vector);
+    }
+
+    public ExerciseGrade getExerciseGrade() {
+        return exercise.evaluate(vectors, getCommandsNumber());
     }
 
     public Turtle getTurtle() {
         return turtle;
     }
 
-    public DisjointVectorsCollection getVectors() {
+    public Exercise getExercise() {
+        return exercise;
+    }
+
+    public void setExercise(Exercise exercise) {
+        this.exercise = exercise;
+        clear();
+    }
+
+    public LinkedList<Vector> getVectors() {
         return vectors;
     }
 
-    public void update(List<Command> commands) {
-        for (Command c : commands) {
-            switch (c.getCommand()) {
-                case NP:
-                    Vector vector = new Vector(turtle.getPosition(), turtle.getAngleDegrees(), c.getNumber());
-                    vectors.add(vector);
-                    Point newPosition;
-                    if (turtle.getPosition().equals(vector.getStartPoint()))
-                        newPosition = vector.getEndPoint();
-                    else
-                        newPosition = vector.getStartPoint();
-                    turtle.setPosition(newPosition);
-                    break;
-                case LW:
-                    turtle.addToAngleDegrees(-c.getNumber());
-                    break;
-                case PW:
-                    turtle.addToAngleDegrees(c.getNumber());
-                    break;
-            }
-            notifyListeners();
-        }
+    public int getCommandsNumber() {
+        return commandRegistry.getCommandsNumber();
+    }
+
+    public void executeCommands(List<Command> commands) {
+        commandRegistry.storeAndExecute(commands);
+        notifyListeners();
+    }
+
+    public CommandRegistry getCommandRegistry() {
+        return commandRegistry;
     }
 
     public void clear() {
         turtle = new Turtle();
-        vectors = new DisjointVectorsCollection();
+        vectors = new LinkedList<>();
+        commandRegistry = new CommandRegistry();
         notifyListeners();
-    }
-
-    public boolean isExercisePassed() {
-        return exercise.vectorsPass(vectors.getVectorsSet());
-    }
-
-    public Exercise getExercise() {
-        return exercise;
     }
 
     private void notifyListeners() {
@@ -89,9 +96,11 @@ public class Board implements ObservableValue<Board>{
 
     @Override
     public void addListener(InvalidationListener listener) {
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public void removeListener(InvalidationListener listener) {
+        throw new UnsupportedOperationException();
     }
 }

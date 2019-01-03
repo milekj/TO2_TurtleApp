@@ -1,37 +1,49 @@
 package pl.edu.agh.to2.presenter;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
+import pl.edu.agh.to2.commands.Command;
 import pl.edu.agh.to2.model.Board;
-import pl.edu.agh.to2.parser.Command;
-import pl.edu.agh.to2.parser.CommandParser;
+import pl.edu.agh.to2.model.ExerciseGrade;
+import pl.edu.agh.to2.parsers.CommandParser;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class CommandLinePresenter {
-    private Board board;
-
-    public void setBoard(Board board) {
-        this.board = board;
-    }
-
     @FXML
     private TextArea commandsInput;
 
+    private Board board;
+    private SimpleObjectProperty<ExerciseGrade> exerciseGrade;
+
+    public CommandLinePresenter() {
+        exerciseGrade = new SimpleObjectProperty<ExerciseGrade>();
+    }
+
+    public void clear() {
+        onReset();
+    }
+
     @FXML
     private void onReset() {
-        commandsInput.clear();
         board.clear();
     }
 
     @FXML
     private void onSubmit() {
-        List<Command> commands = new CommandParser(commandsInput.getText()).getCommands();
-        board.update(commands);
+        try {
+            board.clear();
+            CommandParser parser = new CommandParser(commandsInput.getText(), board);
+            List<Command> commands = parser.parseCommands();
+            board.executeCommands(commands);
+        } catch (IllegalArgumentException e) {
+            commandsInput.setText(e.getMessage());
+        }
+    }
 
-        //only for demo, will be changed later
-        System.out.println(board.getExercise());
-        System.out.println(board.getVectors().getVectorsSet());
-        System.out.println("Is exercise passed?: " + board.isExercisePassed());
+    public void setBoard(Board board) {
+        this.board = board;
     }
 }

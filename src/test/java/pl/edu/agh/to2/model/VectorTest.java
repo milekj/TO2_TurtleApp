@@ -1,7 +1,8 @@
 package pl.edu.agh.to2.model;
 
 import org.junit.jupiter.api.Test;
-import pl.edu.agh.to2.model.*;
+import pl.edu.agh.to2.model.geometry.Point;
+import pl.edu.agh.to2.model.geometry.Vector;
 
 import static java.lang.Math.*;
 import static org.junit.jupiter.api.Assertions.*;

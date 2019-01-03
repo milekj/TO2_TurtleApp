@@ -1,20 +1,23 @@
-package pl.edu.agh.to2.model;
+package pl.edu.agh.to2.model.geometry;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Objects;
 import static java.lang.Math.*;
-import static pl.edu.agh.to2.model.Utilities.FULL_ANGLE_DEGREES;
+import static pl.edu.agh.to2.model.geometry.Utilities.FULL_ANGLE_DEGREES;
+import static pl.edu.agh.to2.model.geometry.Utilities.compareAsBigDecimals;
+import static pl.edu.agh.to2.model.geometry.Utilities.newBigDecimal;
 
-public class Vector {
+public class Vector implements Serializable {
     private Point start;
     private Point end;
-    private BigDecimal length;
+    private double length;
     private int angleDegrees;
 
     public Vector(Point start, int angleDegrees, double length) {
         this.start = start;
         this.end = null;
-        this.length = Utilities.newBigDecimal(length);
+        this.length = length;
         this.angleDegrees = angleDegrees % FULL_ANGLE_DEGREES;
         if (angleDegrees >= FULL_ANGLE_DEGREES / 2)
             normalizeAngle();
@@ -38,12 +41,10 @@ public class Vector {
     public Point getEndPoint() {
         if (end == null) {
             double angleRadians = toRadians(angleDegrees);
-            BigDecimal deltaX = Utilities.newBigDecimal(sin(angleRadians) * length.doubleValue());
-            BigDecimal deltaY = Utilities.newBigDecimal(cos(angleRadians) * length.doubleValue());
-            BigDecimal startX = start.getX();
-            BigDecimal startY = start.getY();
-            BigDecimal endX = startX.add(deltaX);
-            BigDecimal endY = startY.add(deltaY);
+            double deltaX = sin(angleRadians) * length;
+            double deltaY = cos(angleRadians) * length;
+            double endX = start.getX() + deltaX;
+            double endY = start.getY() + deltaY;
             end = new Point(endX, endY);
         }
         return end;
@@ -52,22 +53,22 @@ public class Vector {
     private Vector mergeToThisOnly(Vector v2) {
         if (angleDegrees != v2.angleDegrees)
             return null;
-        BigDecimal startDistancesSum = sumPointDistancesToVectorEnds(v2.start);
-        if (startDistancesSum.compareTo(length) == 0) {
-            BigDecimal endDistancesSum = sumPointDistancesToVectorEnds(v2.getEndPoint());
-            if (endDistancesSum.compareTo(length) == 0)
+        double startDistancesSum = sumPointDistancesToVectorEnds(v2.start);
+        if (compareAsBigDecimals(startDistancesSum, length) == 0) {
+            double endDistancesSum = sumPointDistancesToVectorEnds(v2.getEndPoint());
+            if (compareAsBigDecimals(endDistancesSum, length) == 0)
                 return this;
-            BigDecimal addedLength = getEndPoint().getDistance(v2.getEndPoint());
-            BigDecimal totalNewLength = length.add(addedLength);
-            return new Vector(start, angleDegrees, totalNewLength.doubleValue());
+            double addedLength = getEndPoint().getDistance(v2.getEndPoint());
+            double totalNewLength = length + addedLength;
+            return new Vector(start, angleDegrees, totalNewLength);
         }
         return null;
     }
 
-    private BigDecimal sumPointDistancesToVectorEnds(Point point) {
-        BigDecimal startDistance = start.getDistance(point);
-        BigDecimal endDistance = getEndPoint().getDistance(point);
-        return startDistance.add(endDistance);
+    private double sumPointDistancesToVectorEnds(Point point) {
+        double startDistance = start.getDistance(point);
+        double endDistance = getEndPoint().getDistance(point);
+        return startDistance + endDistance;
     }
 
     @Override
@@ -78,13 +79,13 @@ public class Vector {
             return false;
         Vector vector = (Vector) o;
         return angleDegrees == vector.angleDegrees &&
-                length.compareTo(vector.length) == 0 &&
+                compareAsBigDecimals(length, vector.length) == 0 &&
                 start.equals(vector.start);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(start, angleDegrees, length);
+        return Objects.hash(start, angleDegrees, newBigDecimal(length));
     }
 
     @Override
