@@ -12,14 +12,16 @@ import static pl.edu.agh.to2.model.ExerciseGrade.*;
 
 public class Exercise implements Serializable {
     private Set<Vector> vectors;
+    private String description;
     private ExerciseGrade grade;
     private int commandsNumber;
 
-    public Exercise(List<Vector> vectors, int commandsNumber) {
-        this.grade = UNSOLVED;
+    public Exercise(List<Vector> vectors, String description, int commandsNumber) {
         DisjointVectorsCollection disjointVectors = new DisjointVectorsCollection(vectors);
         this.vectors = disjointVectors.getVectorsSet();
+        this.description = description;
         this.commandsNumber = commandsNumber;
+        this.grade = UNSOLVED;
     }
 
     public ExerciseGrade evaluate(List<Vector> testedVectors, int commandsNumber) {
@@ -44,6 +46,10 @@ public class Exercise implements Serializable {
 
     public Set<Vector> getVectors() {
         return vectors;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     @Override
