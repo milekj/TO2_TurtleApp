@@ -1,4 +1,4 @@
-package pl.edu.agh.to2.model.commands;
+package pl.edu.agh.to2.commands;
 
 import org.junit.jupiter.api.Test;
 import pl.edu.agh.to2.model.Board;
@@ -18,8 +18,8 @@ class ForwardCommandTest {
     void testExecute() {
         Board board = new Board();
         Turtle turtle = board.getTurtle();
-        ForwardCommand command = new ForwardCommand(10);
-        command.execute(board);
+        ForwardCommand command = new ForwardCommand(board, 10);
+        command.execute();
         Point expectedPosition = new Point(10, 0);
         Vector newVector = new Vector(new Point(0, 0), 90, 10);
         List<Vector> expectedVectors = Collections.singletonList(newVector);
@@ -30,8 +30,8 @@ class ForwardCommandTest {
         board = new Board();
         turtle = board.getTurtle();
         turtle.setMarkerState(EMarkerState.UP);
-        command = new ForwardCommand(10);
-        command.execute(board);
+        command = new ForwardCommand(board, 10);
+        command.execute();
         expectedPosition = new Point(10, 0);
         assertEquals(expectedPosition, turtle.getPosition());
         assertTrue(board.getVectors().isEmpty());

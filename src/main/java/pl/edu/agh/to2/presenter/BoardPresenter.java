@@ -12,12 +12,11 @@ import javafx.scene.transform.Rotate;
 import pl.edu.agh.to2.model.Board;
 import pl.edu.agh.to2.model.EMarkerState;
 import pl.edu.agh.to2.model.Exercise;
-import pl.edu.agh.to2.model.commands.Command;
+import pl.edu.agh.to2.commands.Command;
 import pl.edu.agh.to2.model.geometry.Point;
 import pl.edu.agh.to2.model.geometry.Vector;
 import pl.edu.agh.to2.model.Turtle;
 
-import java.math.BigDecimal;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;

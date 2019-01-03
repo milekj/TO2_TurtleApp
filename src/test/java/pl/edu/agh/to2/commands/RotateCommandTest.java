@@ -1,4 +1,4 @@
-package pl.edu.agh.to2.model.commands;
+package pl.edu.agh.to2.commands;
 
 import org.junit.jupiter.api.Test;
 import pl.edu.agh.to2.model.Board;
@@ -11,13 +11,13 @@ class RotateCommandTest {
     void testExecute() {
         Board board = new Board();
         Turtle turtle = board.getTurtle();
-        RotateCommand command = new RotateCommand(90);
-        command.execute(board);
+        RotateCommand command = new RotateCommand(board, 90);
+        command.execute();
         assertEquals(180, turtle.getAngleDegrees());
         assertEquals(1, command.getCommandsNumber());
 
-        command = new RotateCommand(-90);
-        command.execute(board);
+        command = new RotateCommand(board, -90);
+        command.execute();
         assertEquals(90, turtle.getAngleDegrees());
         assertEquals(1, command.getCommandsNumber());
     }

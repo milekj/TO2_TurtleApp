@@ -1,17 +1,20 @@
 package pl.edu.agh.to2.parsers;
 
+import pl.edu.agh.to2.model.Board;
 import pl.edu.agh.to2.model.EMarkerState;
-import pl.edu.agh.to2.model.commands.*;
-import pl.edu.agh.to2.model.commands.Command;
+import pl.edu.agh.to2.commands.*;
+import pl.edu.agh.to2.commands.Command;
 
 import java.util.*;
 
 public class CommandParser {
+    private Board board;
     private Scanner scanner;
     private String token;
 
-    public CommandParser(String commandsText) {
+    public CommandParser(String commandsText, Board board) {
         scanner = new Scanner(commandsText);
+        this.board = board;
     }
 
     public List<Command> parseCommands() {
@@ -32,22 +35,22 @@ public class CommandParser {
     private Command parseSingleCommand() {
         switch (token) {
             case "np":
-                return new ForwardCommand(getNextDouble());
+                return new ForwardCommand(board, getNextDouble());
 
             case "ws":
-                return new BackwardCommand(getNextDouble());
+                return new BackwardCommand(board, getNextDouble());
 
             case "lw":
-                return new RotateCommand(-getNextInt());
+                return new RotateCommand(board, -getNextInt());
 
             case "pw":
-                return new RotateCommand(getNextInt());
+                return new RotateCommand(board, getNextInt());
 
             case "pod":
-                return new SetMarkerStateCommand(EMarkerState.UP);
+                return new SetMarkerStateCommand(board, EMarkerState.UP);
 
             case "opu":
-                return new SetMarkerStateCommand(EMarkerState.DOWN);
+                return new SetMarkerStateCommand(board, EMarkerState.DOWN);
 
             case "powtórz":
                 return parseLoopCommand();
@@ -62,7 +65,7 @@ public class CommandParser {
         String loopToken = scanner.next();
         if (!loopToken.equals("["))
             throw new IllegalStateException("No `[` after loop count");
-        return new LoopCommand(getLoopBodyCommands(), repeatsCount);
+        return new LoopCommand(board, getLoopBodyCommands(), repeatsCount);
     }
 
     private List<Command> getLoopBodyCommands() {
@@ -75,7 +78,7 @@ public class CommandParser {
             else if (loopToken.equals("]")) {
                 bracesCount--;
                 if(bracesCount == 0)
-                    return new CommandParser(loopBody.toString()).parseCommands();
+                    return new CommandParser(loopBody.toString(), board).parseCommands();
             }
             loopBody.append(" ")
                     .append(loopToken);

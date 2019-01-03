@@ -7,19 +7,15 @@ import java.io.Serializable;
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class ExercisesManager implements Serializable {
-    private ArrayList<Exercise> exercises;
+    private List<Exercise> exercises;
     private int current;
 
-    public ExercisesManager(String filePath) {
-        try {
-            exercises = new ArrayList<>(getExercisesFromFile(filePath));
-            current = 0;
-        } catch (IOException e) {
-            throw new IllegalArgumentException("IO error while reading exercises from file ", e);
-        }
+    public ExercisesManager(List<Exercise> exercises) {
+        this.exercises = exercises;
     }
 
     public Exercise getCurrent() {
@@ -44,14 +40,6 @@ public class ExercisesManager implements Serializable {
         if(hasPrevious())
             current--;
         return getCurrent();
-    }
-
-    private LinkedList<Exercise> getExercisesFromFile(String filePath) throws IOException{
-            Path path = Paths.get(filePath);
-            String text = Files.lines(path)
-                            .collect(Collectors.joining("\n"));
-            ExerciseParser parser = new ExerciseParser(text);
-            return parser.getAllExercises();
     }
 
     private boolean isInRange(int i) {

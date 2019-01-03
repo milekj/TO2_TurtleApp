@@ -18,38 +18,18 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ExercisesManagerTest {
     private static ExercisesManager manager;
-    private static String exerciseFilePathname;
     private static List<Exercise> expectedExercises;
+    private static String exercisesText = "np 100 pw 90 np 50 lw 90 /lw 90 np 10 /np 100 pw 90 lw 90";
 
     @BeforeAll
-    static void setUpFAll() {
-        try {
-            File tmpExerciseFile = Files.createTempFile(null, null).toFile();
-            tmpExerciseFile.deleteOnExit();
-            Writer writer = new FileWriter(tmpExerciseFile);
-            writer.write("np 100 pw 90 np 50 lw 90 /lw 90 np 10 /np 100 pw 90 lw 90");
-            writer.close();
-            exerciseFilePathname = tmpExerciseFile.getPath();
-            setUpExpectedExercises();
-        } catch (IOException e) {
-            fail(e);
-        }
-    }
-
     private static void setUpExpectedExercises() {
-        try {
-            String exercisesText = Files.lines(Paths.get(exerciseFilePathname))
-                    .collect(Collectors.joining("\n"));
-            ExerciseParser parser = new ExerciseParser(exercisesText);
-            expectedExercises = parser.getAllExercises();
-        } catch (IOException e) {
-            fail(e);
-        }
+        ExerciseParser parser = new ExerciseParser(exercisesText);
+        expectedExercises = parser.getAllExercises();
     }
 
     @BeforeEach
     void setUpSingleTest(){
-        manager = new ExercisesManager(exerciseFilePathname);
+        manager = new ExercisesManager(expectedExercises);
     }
 
     @Test

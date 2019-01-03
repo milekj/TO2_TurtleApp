@@ -1,4 +1,4 @@
-package pl.edu.agh.to2.model.commands;
+package pl.edu.agh.to2.commands;
 
 import org.junit.jupiter.api.Test;
 import pl.edu.agh.to2.model.Board;
@@ -18,8 +18,8 @@ class BackwardCommandTest {
     void testExecute() {
         Board board = new Board();
         Turtle turtle = board.getTurtle();
-        BackwardCommand command = new BackwardCommand(10);
-        command.execute(board);
+        BackwardCommand command = new BackwardCommand(board, 10);
+        command.execute();
         Point expectedPosition = new Point(-10, 0);
         Vector newVector = new Vector(new Point(-10, 0), 90, 10);
         List<Vector> expectedVectors = Collections.singletonList(newVector);
@@ -31,8 +31,8 @@ class BackwardCommandTest {
         board = new Board();
         turtle = board.getTurtle();
         turtle.setMarkerState(EMarkerState.UP);
-        command = new BackwardCommand(10);
-        command.execute(board);
+        command = new BackwardCommand(board, 10);
+        command.execute();
         expectedPosition = new Point(-10, 0);
         assertEquals(expectedPosition, turtle.getPosition());
         assertTrue(board.getVectors().isEmpty());

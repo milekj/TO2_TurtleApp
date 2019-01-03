@@ -16,7 +16,7 @@
         <right>
             <BorderPane>
                 <top>
-                    <Button text="Clear" onAction="#onReset" prefHeight="50.0" prefWidth="120.0" />
+                    <Button text="Reset " onAction="#onReset" prefHeight="50.0" prefWidth="120.0" />
                 </top>
                 <bottom>
                     <Button text="Run" onAction="#onSubmit" prefHeight="50.0" prefWidth="120.0" />

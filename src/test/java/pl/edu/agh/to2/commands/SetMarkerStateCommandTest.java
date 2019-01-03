@@ -1,4 +1,4 @@
-package pl.edu.agh.to2.model.commands;
+package pl.edu.agh.to2.commands;
 
 import org.junit.jupiter.api.Test;
 import pl.edu.agh.to2.model.Board;
@@ -12,13 +12,13 @@ class SetMarkerStateCommandTest {
     void testExecute() {
         Board board = new Board();
         Turtle turtle = board.getTurtle();
-        SetMarkerStateCommand command = new SetMarkerStateCommand(EMarkerState.UP);
-        command.execute(board);
+        SetMarkerStateCommand command = new SetMarkerStateCommand(board, EMarkerState.UP);
+        command.execute();
         assertEquals(EMarkerState.UP, turtle.getMarkerState());
         assertEquals(1, command.getCommandsNumber());
 
-        command = new SetMarkerStateCommand(EMarkerState.DOWN);
-        command.execute(board);
+        command = new SetMarkerStateCommand(board, EMarkerState.DOWN);
+        command.execute();
         assertEquals(EMarkerState.DOWN, turtle.getMarkerState());
         assertEquals(1, command.getCommandsNumber());
     }

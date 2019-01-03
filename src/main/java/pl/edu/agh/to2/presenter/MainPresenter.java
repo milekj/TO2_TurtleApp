@@ -21,13 +21,6 @@ public class MainPresenter {
 
     @FXML
     public void initialize() {
-        commandLineController.commands().addListener(new ChangeListener<List>() {
-            @Override
-            public void changed(ObservableValue<? extends List> observable, List oldValue, List newValue) {
-                boardController.executeCommands(newValue);
-            }
-        });
-
         exerciseController.exercise().addListener(new ChangeListener<Exercise>() {
             @Override
             public void changed(ObservableValue<? extends Exercise> observable, Exercise oldValue, Exercise newValue) {
@@ -39,6 +32,7 @@ public class MainPresenter {
 
     public void setBoard(Board board) {
         boardController.setBoard(board);
+        commandLineController.setBoard(board);
         board.addListener(new ChangeListener<Board>() {
             @Override
             public void changed(ObservableValue<? extends Board> observable, Board oldValue, Board newValue) {

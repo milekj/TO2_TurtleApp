@@ -3,7 +3,8 @@ package pl.edu.agh.to2.model;
 import javafx.beans.InvalidationListener;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import pl.edu.agh.to2.model.commands.Command;
+import pl.edu.agh.to2.commands.Command;
+import pl.edu.agh.to2.commands.CommandRegistry;
 import pl.edu.agh.to2.model.geometry.Vector;
 
 import java.util.LinkedList;
@@ -13,7 +14,7 @@ public class Board implements ObservableValue<Board>{
     private Turtle turtle;
     private LinkedList<Vector> vectors;
     private Exercise exercise;
-    private int commandsNumber;
+    private CommandRegistry commandRegistry;
 
     private List<ChangeListener<? super Board>> listeners;
 
@@ -21,7 +22,7 @@ public class Board implements ObservableValue<Board>{
         turtle = new Turtle();
         vectors = new LinkedList<>();
         listeners = new LinkedList<>();
-        commandsNumber = 0;
+        commandRegistry = new CommandRegistry();
     }
 
     public Board(Exercise exercise) {
@@ -34,7 +35,7 @@ public class Board implements ObservableValue<Board>{
     }
 
     public ExerciseGrade getExerciseGrade() {
-        return exercise.evaluate(vectors, commandsNumber);
+        return exercise.evaluate(vectors, getCommandsNumber());
     }
 
     public Turtle getTurtle() {
@@ -55,25 +56,22 @@ public class Board implements ObservableValue<Board>{
     }
 
     public int getCommandsNumber() {
-        return commandsNumber;
+        return commandRegistry.getCommandsNumber();
     }
 
     public void executeCommands(List<Command> commands) {
-        if (commands.isEmpty()) {
-            clear();
-        } else {
-            for (Command c : commands) {
-                c.execute(this);
-                commandsNumber += c.getCommandsNumber();
-                notifyListeners();
-            }
-        }
+        commandRegistry.storeAndExecute(commands);
+        notifyListeners();
     }
 
-    private void clear() {
+    public CommandRegistry getCommandRegistry() {
+        return commandRegistry;
+    }
+
+    public void clear() {
         turtle = new Turtle();
         vectors = new LinkedList<>();
-        commandsNumber = 0;
+        commandRegistry = new CommandRegistry();
         notifyListeners();
     }
 

@@ -1,5 +1,6 @@
 package pl.edu.agh.to2.persistence;
 
+import pl.edu.agh.to2.model.ExerciseFileReader;
 import pl.edu.agh.to2.model.ExercisesManager;
 
 import java.io.FileInputStream;
@@ -20,7 +21,8 @@ public class ExerciseMangerSerializer {
             manager = (ExercisesManager) ois.readObject();
             ois.close();
         } catch (Exception e) {
-            manager = new ExercisesManager(newExercisesFilename);
+            ExerciseFileReader reader = new ExerciseFileReader(newExercisesFilename);
+            manager = new ExercisesManager(reader.readExercises());
         }
         return manager;
     }
@@ -28,7 +30,6 @@ public class ExerciseMangerSerializer {
     public static void saveExcercises(ExercisesManager manager) {
         ObjectOutputStream oos = null;
         FileOutputStream fout = null;
-
         try {
             fout = new FileOutputStream(savedExercisesFilename, false);
             oos = new ObjectOutputStream(fout);

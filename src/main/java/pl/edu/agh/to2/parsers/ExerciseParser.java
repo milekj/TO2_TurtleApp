@@ -2,7 +2,7 @@ package pl.edu.agh.to2.parsers;
 
 import pl.edu.agh.to2.model.Board;
 import pl.edu.agh.to2.model.Exercise;
-import pl.edu.agh.to2.model.commands.Command;
+import pl.edu.agh.to2.commands.Command;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -16,7 +16,7 @@ public class ExerciseParser {
         parseErrors = new LinkedList<>();
     }
 
-    public LinkedList<Exercise> getAllExercises() {
+    public List<Exercise> getAllExercises() {
         LinkedList<Exercise> result = new LinkedList<>();
         String[] singleExerciseTexts = splitToSingleExercises();
         for(String s: singleExerciseTexts) {
@@ -30,14 +30,14 @@ public class ExerciseParser {
         return result;
     }
 
-    public LinkedList<String> getParseErrors() {
+    public List<String> getParseErrors() {
         return parseErrors;
     }
 
     private Exercise parseSingleExercise(String exerciseText) {
         try {
-            CommandParser parser = new CommandParser(exerciseText);
             Board board = new Board();
+            CommandParser parser = new CommandParser(exerciseText, board);
             List<Command> commands = parser.parseCommands();
             board.executeCommands(commands);
             return new Exercise(board.getVectors(), board.getCommandsNumber());
