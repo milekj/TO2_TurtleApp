@@ -11,10 +11,12 @@ public class CommandParser {
     private Board board;
     private Scanner scanner;
     private String token;
+    private Set<String> createdProceduresNames;
 
     public CommandParser(String commandsText, Board board) {
-        scanner = new Scanner(commandsText);
         this.board = board;
+        scanner = new Scanner(commandsText);
+        createdProceduresNames = new HashSet<>();
     }
 
     public List<Command> parseCommands() {
@@ -36,39 +38,50 @@ public class CommandParser {
         switch (token) {
             case "np":
                 return new ForwardCommand(board, getNextDouble());
-
             case "ws":
                 return new BackwardCommand(board, getNextDouble());
-
             case "lw":
                 return new RotateCommand(board, -getNextInt());
-
             case "pw":
                 return new RotateCommand(board, getNextInt());
-
             case "pod":
                 return new SetMarkerStateCommand(board, EMarkerState.UP);
-
             case "opu":
                 return new SetMarkerStateCommand(board, EMarkerState.DOWN);
-
             case "powtórz":
                 return parseLoopCommand();
-
+            case "oto":
+                return parseCreateProcedureCommand();
             default:
-                throw new IllegalStateException("Unrecognized command found: " + token);
+                return parseExecuteProcedureCommand();
         }
     }
 
     private Command parseLoopCommand() {
         int repeatsCount = getNextInt();
-        String loopToken = scanner.next();
+        String loopToken = getNextString();
         if (!loopToken.equals("["))
             throw new IllegalStateException("No `[` after loop count");
-        return new LoopCommand(board, getLoopBodyCommands(), repeatsCount);
+        return new LoopCommand(board, getBlockBodyCommands(), repeatsCount);
     }
 
-    private List<Command> getLoopBodyCommands() {
+    private Command parseCreateProcedureCommand() {
+        String name = getNextString();
+        String token = getNextString();
+        if (!token.equals("["))
+            throw new IllegalStateException("No `[` after procedure name");
+        Command command = new CreateProcedureCommand(board, name, getBlockBodyCommands());
+        createdProceduresNames.add(name);
+        return command;
+    }
+
+    private Command parseExecuteProcedureCommand() {
+        if (board.getProcedures().containsKey(token) || createdProceduresNames.contains(token))
+            return new ExecuteProcedureCommand(board, token);
+        throw new IllegalStateException(token + " is not defined");
+    }
+
+    private List<Command> getBlockBodyCommands() {
         StringBuilder loopBody = new StringBuilder();
         int bracesCount = 1;
         while (scanner.hasNext()) {
@@ -92,5 +105,9 @@ public class CommandParser {
 
     private int getNextInt() {
         return scanner.nextInt();
+    }
+
+    private String getNextString() {
+        return scanner.next();
     }
 }

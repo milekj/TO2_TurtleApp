@@ -1,5 +1,5 @@
 [
-{commands : "powtórz 3 [ np 100 lw 120 ]", description : "Trójkąt równoboczny o boku 100"},
-{commands : "powtórz 4 [ np 100 lw 90 ]", description : "Kwadrat o boku 100"},
-{commands : "powtórz 5 [ np 60 lw 72 ]", description : "Pięciokąt foremny o boku 60"}
+{commands : "oto trójkąt [ powtórz 3 [ np 100 lw 120 ] ] trójkąt", description : "Trójkąt równoboczny o boku 100"},
+{commands : "oto kwadrat [ powtórz 4 [ np 100 lw 90 ] ] kwadrat", description : "Kwadrat o boku 100"},
+{commands : "oto pięciokąt [ powtórz 5 [ np 60 lw 72 ] ] pięciokąt", description : "Pięciokąt foremny o boku 60"}
 ]
