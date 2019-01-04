@@ -33,6 +33,7 @@ public class ExerciseParser {
                 Exercise e = parseSingleExercise(commandsText, description);
                 result.add(e);
             } catch (IllegalArgumentException | JSONException e) {
+                System.out.println(e);
                 parseErrors.add(e.getMessage());
             }
         }

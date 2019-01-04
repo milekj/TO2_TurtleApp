@@ -2,7 +2,10 @@ package pl.edu.agh.to2.presenter;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.TextArea;
+import javafx.stage.Popup;
 import pl.edu.agh.to2.commands.Command;
 import pl.edu.agh.to2.model.Board;
 import pl.edu.agh.to2.model.ExerciseGrade;
@@ -39,11 +42,20 @@ public class CommandLinePresenter {
             List<Command> commands = parser.parseCommands();
             board.executeCommands(commands);
         } catch (IllegalArgumentException e) {
-            commandsInput.setText(e.getMessage());
+            showErrorPopup(e.getMessage());
         }
     }
 
     public void setBoard(Board board) {
         this.board = board;
+    }
+
+    private void showErrorPopup(String message) {
+        Alert a = new Alert(Alert.AlertType.ERROR);
+        a.setTitle("Syntax error");
+        a.setGraphic(null);
+        a.setHeaderText(null);
+        a.setContentText(message);
+        a.show();
     }
 }

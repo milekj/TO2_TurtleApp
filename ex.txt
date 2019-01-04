@@ -1,5 +1,18 @@
 [
-{commands : "oto trójkąt [ powtórz 3 [ np 100 lw 120 ] ] trójkąt", description : "Trójkąt równoboczny o boku 100"},
-{commands : "oto kwadrat [ powtórz 4 [ np 100 lw 90 ] ] kwadrat", description : "Kwadrat o boku 100"},
-{commands : "oto pięciokąt [ powtórz 5 [ np 60 lw 72 ] ] pięciokąt", description : "Pięciokąt foremny o boku 60"}
+    {	commands : "np 100",
+		description : "Żółw rysuje linię przemieszczając się. Do poruszania żółwia naprzód służy komenda \"np <długość>\". Narysuj linię o długości 100."},
+    {	commands : "ws 100",
+        description : "Żółw może się również cofać. Służy do tego komenda \"ws <długość>\". Narysuj linię o długości 100, cofając się."},
+    {	commands : "np 100 lw 90 np 100 pw 90 np 100",
+        description : "Żółw może obracać się w lewo lub w prawo. Służą do tego komendy \"lw <kąt>\" i \"pw <kąt>\". Podane linie mają długości 100."},
+    {	commands : "np 50 pod np 50 opu np 50",
+        description : "Żółwia można podnieść - wtedy nie zostawia on śladów na planszy. Do podnoszenia służy komenda \"pod\", do opuszczenia \"opu\". Podane linie mają długości 50."},
+    {	commands : "powtórz 4 [ np 100 lw 90 ]",
+        description : "Żółw potrafi powtarzać ruchy pewną ilość razy. Służy do tego komenda\"powtórz <liczba_powtórzeń> [ <komendy> ]\". Podany kwadrat ma bok długości 100"},
+    {	commands : "powtórz 3 [ powtórz 4 [ np 50 lw 90 ] np 50 ]",
+        description : "Pamiętaj, że w ciele komendy powtórz może znajdować się rownież komenda powtórz. Podane kwadraty mają bok długości 50"},
+    {	commands : "oto kwadrat [ powtórz 4 [ np 50 lw 90 ] ] powtórz 4 [ kwadrat pw 90 ]",
+        description : "Żółw potrafi uczyć się nowych poleceń - nazywamy je procedurami. Do stworzenia procedury służy komenda \"oto <nazwa> [ <komendy> ]\". Aby kazać żółwiowi wykonać procedurę po prostu napisz jej nazwę. Podane kwadraty mają bok długości 50"},
+    {	commands : "oto trójkąt [ powtórz 3 [ np 50 lw 120 ] ] oto superTrójkąt [ trójkąt np 50 trójkąt lw 120 np 50 pw 120 trójkąt pw 120 np 50 lw 120 ] lw 60 powtórz 4 [ superTrójkąt pw 90 ]",
+        description : "Podane trójkąty mają bok długości 50 ;)"}
 ]

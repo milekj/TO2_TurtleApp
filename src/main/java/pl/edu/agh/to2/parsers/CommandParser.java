@@ -19,6 +19,11 @@ public class CommandParser {
         createdProceduresNames = new HashSet<>();
     }
 
+    private CommandParser(String commandsText, Board board, Set<String> createdProceduresNames) {
+        this(commandsText, board);
+        this.createdProceduresNames = createdProceduresNames;
+    }
+
     public List<Command> parseCommands() {
         List<Command> commands = new LinkedList<>();
         try {
@@ -91,7 +96,7 @@ public class CommandParser {
             else if (loopToken.equals("]")) {
                 bracesCount--;
                 if(bracesCount == 0)
-                    return new CommandParser(loopBody.toString(), board).parseCommands();
+                    return new CommandParser(loopBody.toString(), board, createdProceduresNames).parseCommands();
             }
             loopBody.append(" ")
                     .append(loopToken);
