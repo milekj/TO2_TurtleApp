@@ -10,11 +10,11 @@
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="pl.edu.agh.to2.presenter.MainPresenter"
-            prefHeight="400.0" prefWidth="600.0">
+            prefHeight="600.0" prefWidth="700.0">
     <top>
         <BorderPane xmlns="http://javafx.com/javafx"
         xmlns:fx="http://javafx.com/fxml"
-        prefHeight="300.0" prefWidth="600.0">
+        prefHeight="450.0" prefWidth="700.0">
             <left>
                 <fx:include fx:id="board" source="Board.fxml" />
             </left>

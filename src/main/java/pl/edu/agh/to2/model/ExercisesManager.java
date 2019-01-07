@@ -18,9 +18,13 @@ public class ExercisesManager implements Serializable {
         this.exercises = exercises;
     }
 
+    public int getExercisesCount() { return exercises.size(); }
+
     public Exercise getCurrent() {
         return exercises.get(current);
     }
+
+    public int getCurrentIndex() { return current; }
 
     public boolean hasNext() {
         return isInRange(current + 1);
@@ -39,6 +43,12 @@ public class ExercisesManager implements Serializable {
     public Exercise moveToPrevious() {
         if(hasPrevious())
             current--;
+        return getCurrent();
+    }
+
+    public Exercise moveToIndex(int index) {
+        if(isInRange(index))
+            current = index;
         return getCurrent();
     }
 

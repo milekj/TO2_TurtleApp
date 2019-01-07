@@ -9,17 +9,17 @@
 <BorderPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="pl.edu.agh.to2.presenter.CommandLinePresenter"
-            prefHeight="100.0" prefWidth="600.0">
+            prefHeight="150.0" prefWidth="700.0">
         <left>
-            <TextArea fx:id="commandsInput" prefHeight="100.0" prefWidth="480.0" />
+            <TextArea fx:id="commandsInput" prefHeight="150.0" prefWidth="550.0" />
         </left>
         <right>
             <BorderPane>
                 <top>
-                    <Button text="Reset " onAction="#onReset" prefHeight="50.0" prefWidth="120.0" />
+                    <Button text="Reset " onAction="#onReset" prefHeight="75.0" prefWidth="150.0" />
                 </top>
                 <bottom>
-                    <Button text="Run" onAction="#onSubmit" prefHeight="50.0" prefWidth="120.0" />
+                    <Button text="Run" onAction="#onSubmit" prefHeight="75.0" prefWidth="150.0" />
                 </bottom>
             </BorderPane>
         </right>

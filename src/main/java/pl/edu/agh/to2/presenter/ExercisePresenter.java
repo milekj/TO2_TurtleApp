@@ -1,31 +1,32 @@
 package pl.edu.agh.to2.presenter;
 
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.paint.Color;
 import pl.edu.agh.to2.model.Exercise;
 import pl.edu.agh.to2.model.ExerciseGrade;
 import pl.edu.agh.to2.model.ExercisesManager;
 import pl.edu.agh.to2.persistence.ExerciseMangerSerializer;
 
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
-
 public class ExercisePresenter {
     private ExercisesManager manager;
     private SimpleObjectProperty<Exercise> exercise;
 
-    public ExercisePresenter() {
-        exercise = new SimpleObjectProperty<Exercise>();
-    }
+    @FXML
+    private Label exerciseName;
 
-    public void setExercisesManager(ExercisesManager manager) {
-        this.manager = manager;
-        exercise.setValue(manager.getCurrent());
-        updateButtons();
-    }
+    @FXML
+    private Label exerciseDescription;
+
+    @FXML
+    private ListView<String> exercisesList;
 
     @FXML
     private Label result;
@@ -35,6 +36,43 @@ public class ExercisePresenter {
 
     @FXML
     private Button next;
+
+    public ExercisePresenter() {
+        exercise = new SimpleObjectProperty<Exercise>();
+    }
+
+    public void setExercisesManager(ExercisesManager manager) {
+        this.manager = manager;
+
+        ObservableList list = FXCollections.observableArrayList();
+        for (int i = 0; i < manager.getExercisesCount(); i++) {
+            list.add("Exercise " + (i + 1));
+        }
+        exercisesList.setItems(list);
+
+        exercisesList.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                setExercise((int)newValue);
+            }
+        });
+
+        setExercise(manager.getCurrent());
+    }
+
+    public void setExercise(Exercise exercise) {
+        int index = manager.getCurrentIndex();
+        this.exercise.setValue(exercise);
+        exerciseName.setText("Exercise " + (index + 1));
+        exerciseDescription.setText(exercise.getDescription());
+        exercisesList.getSelectionModel().select(index);
+        exercisesList.scrollTo(index);
+        updateButtons();
+    }
+
+    public void setExercise(int index) {
+        setExercise(manager.moveToIndex(index));
+    }
 
     public void onBoardChange(ExerciseGrade exerciseGrade) {
         saveGrades();
@@ -60,14 +98,12 @@ public class ExercisePresenter {
 
     @FXML
     private void onPrev() {
-        exercise.setValue(manager.moveToPrevious());
-        updateButtons();
+        setExercise(manager.moveToPrevious());
     }
 
     @FXML
     private void onNext() {
-        exercise.setValue(manager.moveToNext());
-        updateButtons();
+        setExercise(manager.moveToNext());
     }
 
     private void updateButtons() {
