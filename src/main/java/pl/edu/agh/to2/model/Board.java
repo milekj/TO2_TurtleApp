@@ -7,22 +7,25 @@ import pl.edu.agh.to2.commands.Command;
 import pl.edu.agh.to2.commands.CommandRegistry;
 import pl.edu.agh.to2.model.geometry.Vector;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 public class Board implements ObservableValue<Board>{
     private Turtle turtle;
-    private LinkedList<Vector> vectors;
+    private List<Vector> vectors;
     private Exercise exercise;
     private CommandRegistry commandRegistry;
-
+    private Map<String, List<Command>> procedures;
     private List<ChangeListener<? super Board>> listeners;
 
     public Board() {
         turtle = new Turtle();
         vectors = new LinkedList<>();
-        listeners = new LinkedList<>();
+        procedures = new HashMap<>();
         commandRegistry = new CommandRegistry();
+        listeners = new LinkedList<>();
     }
 
     public Board(Exercise exercise) {
@@ -32,6 +35,18 @@ public class Board implements ObservableValue<Board>{
 
     public void addVector(Vector vector) {
         vectors.add(vector);
+    }
+
+    public void executeCommands(List<Command> commands) {
+        commandRegistry.storeAndExecute(commands);
+        notifyListeners();
+    }
+
+    public void clear() {
+        turtle = new Turtle();
+        vectors = new LinkedList<>();
+        commandRegistry = new CommandRegistry();
+        notifyListeners();
     }
 
     public ExerciseGrade getExerciseGrade() {
@@ -48,31 +63,24 @@ public class Board implements ObservableValue<Board>{
 
     public void setExercise(Exercise exercise) {
         this.exercise = exercise;
+        procedures.clear();
         clear();
     }
 
-    public LinkedList<Vector> getVectors() {
+    public List<Vector> getVectors() {
         return vectors;
+    }
+
+    public Map<String, List<Command>> getProcedures() {
+        return procedures;
     }
 
     public int getCommandsNumber() {
         return commandRegistry.getCommandsNumber();
     }
 
-    public void executeCommands(List<Command> commands) {
-        commandRegistry.storeAndExecute(commands);
-        notifyListeners();
-    }
-
     public CommandRegistry getCommandRegistry() {
         return commandRegistry;
-    }
-
-    public void clear() {
-        turtle = new Turtle();
-        vectors = new LinkedList<>();
-        commandRegistry = new CommandRegistry();
-        notifyListeners();
     }
 
     private void notifyListeners() {

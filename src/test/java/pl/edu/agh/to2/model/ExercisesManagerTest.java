@@ -19,7 +19,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class ExercisesManagerTest {
     private static ExercisesManager manager;
     private static List<Exercise> expectedExercises;
-    private static String exercisesText = "np 100 pw 90 np 50 lw 90 /lw 90 np 10 /np 100 pw 90 lw 90";
+    private static String exercisesText = "[" +
+            "{commands : \"np 100 pw 90 np 50 lw 90\", description : \"\"}, " +
+            "{commands : \"lw 90 np 10\", description : \"\"}, " +
+            "{commands : \"np 100 pw 90 lw 90\", description : \"\"}, " +
+            "]";
+
 
     @BeforeAll
     private static void setUpExpectedExercises() {
